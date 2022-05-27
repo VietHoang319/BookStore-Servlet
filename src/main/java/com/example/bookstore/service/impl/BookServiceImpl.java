@@ -32,7 +32,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findById(int id) {
-        return null;
+        Book book = null;
+        String query = "select * from book where id = ?";
+        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)){
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return book;
     }
 
     @Override
@@ -56,7 +63,22 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> findByName(String name) {
-        return null;
+        List<Book> books = new ArrayList<>();
+        String query = "select id, name, image, price from book where name like ? and status = true;";
+        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)){
+            preparedStatement.setString(1, "%" + name + "%");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nameFind = rs.getString("name");
+                String image = rs.getString("image");
+                int price = rs.getInt("price");
+                books.add(new Book(id, nameFind, image, price));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return books;
     }
 
     @Override

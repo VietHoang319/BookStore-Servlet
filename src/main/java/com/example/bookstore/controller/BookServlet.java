@@ -13,6 +13,7 @@ import java.util.List;
 @WebServlet(name = "BookServlet", value = "/books")
 public class BookServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -22,9 +23,20 @@ public class BookServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "search":
+                searchBook(request, response);
+                break;
             default:
                 showListBook(request, response);
         }
+    }
+
+    private void searchBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("book/list.jsp");
+        String name = request.getParameter("name");
+        List<Book> books = bookService.findByName(name);
+        request.setAttribute("books", books);
+        requestDispatcher.forward(request, response);
     }
 
     private void showListBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

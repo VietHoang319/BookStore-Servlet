@@ -180,7 +180,7 @@
                 </article>
             </section>
 
-            <p class="text-center"><a href="products.html">More Books &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
+            <p class="text-center"><a href="/books">More Books &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
 
             <br>
 

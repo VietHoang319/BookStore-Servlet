@@ -28,7 +28,7 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="" class="logo">
+            <a href="/" class="logo">
                 <span class="fa fa-book"></span> <span class="title">Nhà sách bông bông</span>
             </a>
 
@@ -47,7 +47,7 @@
         <h2>Menu</h2>
         <ul>
             <li><a href="contact.html">Người dùng</a></li>
-            <li><a href="" class="active">Trang chủ</a></li>
+            <li><a href="/" class="active">Trang chủ</a></li>
 
             <li><a href="/books">Sách</a></li>
 
@@ -70,8 +70,11 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <h1>Danh Mục Sách</h1>
-
+            <form method="">
+                <a href="/books"><h1 style="display: inline">Tất Cả Sách</h1></a>
+                <input type="submit" value="search" name="action" style="display: inline; float: right">
+                <input type="text" name="name" placeholder="Nhập tên sách mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
+            </form>
             <div class="image main">
                 <img src="images/banner-image-6-1920x500.jpg" class="img-fluid" alt=""/>
             </div>
@@ -81,9 +84,9 @@
                 <c:forEach var="book" items="${books}">
                     <article class="style2">
 									<span class="image">
-										<img src="${book.image}" alt="" height="400px"/>
+										<img src="${book.image}" alt="" height="425px"/>
 									</span>
-                        <a href="product-details.html">
+                        <a href="/book-details?id=${book.id}">
                             <h2>${book.name}</h2>
 
                             <p>
