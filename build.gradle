@@ -22,6 +22,7 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
