@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where roleId=2 or roleId=1" );) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where (roleId=2 or roleId=1) and status=true" );) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -105,9 +105,8 @@ public class UserServiceImpl implements UserService {
     public boolean delete(User user) throws SQLException{
         boolean rowDeleted;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update user set status=? where id=?;");) {
-            preparedStatement.setBoolean(1, user.isStatus());
-            preparedStatement.setInt(2, user.getId());
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set status=false where id=?;");) {
+            preparedStatement.setInt(1, user.getId());
             rowDeleted = preparedStatement.executeUpdate() > 0;
         }
         return rowDeleted;
@@ -116,10 +115,11 @@ public class UserServiceImpl implements UserService {
     public boolean update(User user) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update user set name=?,roleId=? where id=?;");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set name=?,phone =?,roleId=? where id=?;");) {
             preparedStatement.setString(1, user.getName());
-            preparedStatement.setInt(2, user.getRoleId());
-            preparedStatement.setInt(3, user.getId());
+            preparedStatement.setString(2, user.getPhone());
+            preparedStatement.setInt(3, user.getRoleId());
+            preparedStatement.setInt(4, user.getId());
             rowUpdated = preparedStatement.executeUpdate() > 0;
         }
         return rowUpdated;

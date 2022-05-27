@@ -168,7 +168,7 @@
                         <td>${users.get(i).phone}</td>
                         <td>${roles.get(i).name}</td>
                         <td><a href="/users?action=edit&id=${users.get(i).id}">Sửa</a></td>
-                        <td><a href="/users?action=delete$id=${users.get(i).id}">Xoá</a></td>
+                        <td><a href="/users?action=delete&id=${users.get(i).id}">Xoá</a></td>
                     </tr>
                 </c:forEach>
             </table>

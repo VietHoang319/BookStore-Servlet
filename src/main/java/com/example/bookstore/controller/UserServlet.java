@@ -32,7 +32,11 @@ public class UserServlet extends HttpServlet {
                 showEditStaff(request,response);
                 break;
             case "delete":
-                showDeleteStaff(request,response);
+                try {
+                    deleteStaff(request,response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 showListStaff(request,response);
@@ -53,7 +57,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showEditStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user/list.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user/edit.jsp");
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.findById(id);
         request.setAttribute("users",user);
@@ -93,13 +97,7 @@ public class UserServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-            case "delete":
-                try {
-                    deleteStaff(request,response);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
+
 
         }
     }

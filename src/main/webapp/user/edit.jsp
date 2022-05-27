@@ -12,6 +12,7 @@
 </head>
 <body>
 <form method="post">
+    <input type="hidden" name="action" value="edit">
     <input type="hidden" name="id" value="${users.id}">
     <input type="hidden" name="username" value="${users.username}">
     <input type="hidden" name="password" value="${users.password}">
@@ -20,9 +21,9 @@
     <select name="roleId">
         <option value="1">quản lý</option>
         <option value="2">nhân viên</option>
-        <option value="3">khách hàng</option>
     </select>
    <input type="hidden" name="status" value="${users.status}">
+    <button>Sửa</button>
 </form>
 </body>
 </html>

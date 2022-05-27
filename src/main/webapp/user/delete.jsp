@@ -12,14 +12,6 @@
 </head>
 <body>
 <form method="post">
-    <table>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
     <h4>${users.status}</h4>
     <button>Xoá</button>
 </form>
