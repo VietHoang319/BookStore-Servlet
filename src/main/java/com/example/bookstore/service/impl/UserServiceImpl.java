@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByName(String name) {
-        List<User> users = null;
+        List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where (roleId=2 or roleId=1) and name like ? and status = true; ");) {
             preparedStatement.setString(1, '%'+name+'%');

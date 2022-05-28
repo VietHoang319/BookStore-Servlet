@@ -22,6 +22,18 @@ public class CustomerServiceImpl implements UserService {
     }
     @Override
     public void add(User user) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into user(username,password,name,phone,roleId,status ) values (?,?,?,?,?,? )");) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3,user.getName());
+            preparedStatement.setString(4,user.getPhone());
+            preparedStatement.setInt(5,user.getRoleId());
+            preparedStatement.setBoolean(6,user.isStatus());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+
+        }
 
     }
 

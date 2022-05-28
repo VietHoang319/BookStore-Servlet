@@ -102,7 +102,7 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <form method="post">
+            <form method="get">
                 <a href="/users"><h1 style="display: inline">Quản lý nhân viên </h1></a>
                 <input type="submit" value="search" name="action" style="display: inline; float: right">
                 <input type="text" name="name" placeholder="Nhập tên nhân viên mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
