@@ -3,8 +3,8 @@ package com.example.bookstore.model;
 public class Book {
     private int id;
     private String name;
-    private int authorId;
-    private int categoryId;
+    private Author author;
+    private Category category;
     private String image;
     private int price;
     private int numberOfBook;
@@ -13,11 +13,11 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, String name, int authorId, int categoryId, String image, int price, int numberOfBook, boolean status) {
+    public Book(int id, String name, Author author, Category category, String image, int price, int numberOfBook, boolean status) {
         this.id = id;
         this.name = name;
-        this.authorId = authorId;
-        this.categoryId = categoryId;
+        this.author = author;
+        this.category = category;
         this.image = image;
         this.price = price;
         this.numberOfBook = numberOfBook;
@@ -29,6 +29,16 @@ public class Book {
         this.name = name;
         this.image = image;
         this.price = price;
+    }
+
+    public Book(int id, String name, Author author, Category category, String image, int price, int numberOfBook) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.category = category;
+        this.image = image;
+        this.price = price;
+        this.numberOfBook = numberOfBook;
     }
 
     public int getId() {
@@ -47,20 +57,20 @@ public class Book {
         this.name = name;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getImage() {

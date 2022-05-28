@@ -1,6 +1,8 @@
 package com.example.bookstore.service.impl;
 
+import com.example.bookstore.model.Author;
 import com.example.bookstore.model.Book;
+import com.example.bookstore.model.Category;
 import com.example.bookstore.service.BookService;
 
 import java.sql.*;
@@ -33,9 +35,27 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book findById(int id) {
         Book book = null;
-        String query = "select * from book where id = ?";
-        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)){
-
+        String query = "select book.id as id, book.name as bookName, authorId, author.name as authorName, categoryId, category.name as categoryName, image, price, numberOfBook\n" +
+                "from book\n" +
+                "join author on author.id = book.authorId\n" +
+                "join category on category.id = book.categoryId where book.id = ? and book.status = true;";
+        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, String.valueOf(id));
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idFind = rs.getInt("id");
+                String name = rs.getString("bookName");
+                int authorId = rs.getInt("authorId");
+                String authorName = rs.getString("authorName");
+                int categoryId = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                String image = rs.getString("image");
+                int price = rs.getInt("price");
+                int numberOfBook = rs.getInt("numberOfBook");
+                Author author = new Author(authorId, authorName);
+                Category category = new Category(categoryId, categoryName);
+                book = new Book(idFind, name, author, category, image, price, numberOfBook);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

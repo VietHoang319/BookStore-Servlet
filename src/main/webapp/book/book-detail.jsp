@@ -27,7 +27,7 @@
 
             <!-- Logo -->
             <a href="/" class="logo">
-                <span class="fa fa-book"></span> <span class="title">Book Online Store Website</span>
+                <span class="fa fa-book"></span> <span class="title">Nhà sách bông bông</span>
             </a>
 
             <!-- Nav -->
@@ -69,46 +69,35 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <h1>Lorem ipsum dolor sit amet <span class="pull-right">$79.00</span></h1>
+            <h1>${book.name}<span class="pull-right">${book.price} đồng</span></h1>
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5">
-                        <img src="images/product-1-720x480.jpg" class="img-fluid" alt="">
+                    <div class="col-md-5" style="height: 310px; display:flex; justify-content: center">
+                        <img src="${book.image}" class="img-fluid" alt="" style="height: 100%">
                     </div>
 
                     <div class="col-md-7">
-                        <p> Quas qui, repellendus ullam, quam possimus ducimus earum!</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, iste neque, ut recusandae quibusdam perferendis qui modi aliquam quaerat molestiae.</p>
+                        <p><strong>Tác giả: </strong><a href="#">${book.author.name}</a></p>
+                        <p><strong>Thể loại: </strong><a href="#">${book.category.name}</a></p>
+                        <p><strong>Số lượng sách còn trong kho: </strong>${book.numberOfBook} quyển</p>
 
                         <div class="row">
-                            <div class="col-sm-4">
-                                <label class="control-label">Extra 1</label>
+                            <div class="col-sm-11">
+                                <form method="">
+                                    <label class="control-label">Số lượng đặt hàng</label>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="number" value="1" name="numberOfOrder" id="name">
+                                            </div>
+                                        </div>
 
-                                <div class="form-group">
-                                    <select>
-                                        <option value="0">Extra 1</option>
-                                        <option value="1">Extra 2</option>
-                                        <option value="2">Extra 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-8">
-                                <label class="control-label">Quantity</label>
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" name="name" id="name">
+                                        <div class="col-sm-6">
+                                            <input type="submit" class="primary" value="Thêm vào giỏ hàng">
                                         </div>
                                     </div>
-
-                                    <div class="col-sm-6">
-                                        <input type="submit" class="primary" value="Add to Cart">
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -119,7 +108,7 @@
             <br>
 
             <div class="container-fluid">
-                <h2 class="h2">Similar Products</h2>
+                <h2 class="h2">Các sản phẩm khác</h2>
 
                 <!-- Products -->
                 <section class="tiles">
@@ -171,10 +160,8 @@
         <div class="inner">
             <section>
                 <ul class="icons">
-                    <li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
                     <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
                     <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
                 </ul>
 
                 &nbsp;

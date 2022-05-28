@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "BookDetailServlet", value = "/book-details")
 public class BookDetailServlet extends HttpServlet {
@@ -22,13 +23,18 @@ public class BookDetailServlet extends HttpServlet {
         }
         switch (action) {
             default:
-                showBookDetail(request, response);
+                try {
+                    showBookDetail(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
         }
     }
 
-    private void showBookDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showBookDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         Book book = bookService.findById(id);
+        request.setAttribute("book", book);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("book/book-detail.jsp");
         requestDispatcher.forward(request, response);
     }
