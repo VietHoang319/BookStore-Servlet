@@ -70,7 +70,7 @@
         <div class="inner">
             <h1>Quản Lý Tác Giả</h1>
             <div style="margin-bottom: 20px">
-                <button id="myBtn">Tạo Mới</button>
+                <button id="myBtn"><a href="/authors?action=create">Tạo Mới</a></button>
             </div>
             <div id="myModal" class="modal">
                 <div class="modal-content">
