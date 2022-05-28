@@ -103,59 +103,10 @@
     <div id="main">
         <div class="inner">
             <form method="post">
-                <a href="/users"><h1 style="display: inline">Quản lý nhân viên </h1></a>
+                <a href="/customers"><h1 style="display: inline">Quản lý Khách Hàng </h1></a>
                 <input type="submit" value="search" name="action" style="display: inline; float: right">
-                <input type="text" name="name" placeholder="Nhập tên nhân viên mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
+                <input type="text" name="name" placeholder="Nhập tên khách hàng mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
             </form>
-        <%-- Tạo--%>
-            <div style="margin-bottom: 20px">
-                <button id="myBtn">Tạo Mới</button>
-            </div>
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <form method="post">
-                        <input type="hidden" name="action" value="create">
-                        <input type="hidden" name="id">
-                        Username <input type="text" name="username">
-                        Password <input type="password" name="password">
-                        Name <input type="text" name="name">
-                        Phone <input type="text" name="phone">
-                        <%--                        <input type="text" name="roleId"> Role--%>
-                        <select name="roleId">
-                            <option value="1">quản lý</option>
-                            <option value="2">nhân viên</option>
-<%--                            <option value="3">khách hàng</option>--%>
-                        </select>
-                         <input type="hidden" name="status" value="true">
-<%--                        <select name="status">--%>
-<%--                            <option value="0">false</option>--%>
-<%--                            <option value="1">true</option>--%>
-<%--                        </select>--%>
-                        <div style="text-align: center;margin-top: 20px">
-                            <button>Tạo</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <script>
-                let modal = document.getElementById("myModal");
-                let btn = document.getElementById("myBtn");
-                let span = document.getElementsByClassName("close")[0];
-                btn.onclick = function () {
-                    modal.style.display = "block";
-                }
-                span.onclick = function () {
-                    modal.style.display = "none";
-                }
-                window.onclick = function (event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
-            </script>
-            <!-- Staffs -->
             <table>
                 <tr>
                     <th>Tên</th>
@@ -169,8 +120,8 @@
                         <td>${users.get(i).name}</td>
                         <td>${users.get(i).phone}</td>
                         <td>${roles.get(i).name}</td>
-                        <td><a href="/users?action=edit&id=${users.get(i).id}">Sửa</a></td>
-                        <td><a href="/users?action=delete&id=${users.get(i).id}">Xoá</a></td>
+                        <td><a href="/customers?action=edit&id=${users.get(i).id}">Sửa</a></td>
+                        <td><a href="/customers?action=delete&id=${users.get(i).id}">Xoá</a></td>
                     </tr>
                 </c:forEach>
             </table>

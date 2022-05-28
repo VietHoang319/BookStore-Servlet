@@ -38,9 +38,22 @@ public class UserServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
+            case "search":
+                showSearch(request,response);
+                break;
             default:
                 showListStaff(request,response);
         }
+    }
+
+    private void showSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
+        String name = request.getParameter("name");
+        List<User> users = userService.findByName(name);
+        List<Role> roles = roleService.findAllUser(users);
+        request.setAttribute("users",users);
+        request.setAttribute("roles",roles);
+        requestDispatcher.forward(request,response);
     }
 
     private void showDeleteStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -15,9 +15,11 @@
     <input type="hidden" name="action" value="edit">
     <input type="hidden" name="id" value="${users.id}">
     <input type="hidden" name="username" value="${users.username}">
-    <input type="hidden" name="password" value="${users.password}">
-    <input type="text" name="name" value="${users.name}">
-    <input type="text" name="phone" value="${users.phone}">
+    Tên <br>
+    <input type="text" name="name" value="${users.name}"> <br>
+    <input type="text" name="password" value="${users.password}">
+    Số điện thoại <br>
+    <input type="text" name="phone" value="${users.phone}"> <br>
     <select name="roleId">
         <option value="1">quản lý</option>
         <option value="2">nhân viên</option>

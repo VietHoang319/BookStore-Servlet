@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void add(User user) throws SQLException {
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into user(username,password,name,phone,roleId,status) values (?,?,?,?,?,?)");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into user(username,password,name,phone,roleId,status ) values (?,?,?,?,?,? )");) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3,user.getName());
@@ -88,9 +88,29 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+
     @Override
     public List<User> findByName(String name) {
-        return null;
+        List<User> users = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where (roleId=2 or roleId=1) and name like ? and status = true; ");) {
+            preparedStatement.setString(1, '%'+name+'%');
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String nameFind = rs.getString("name");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("roleId");
+                boolean status = rs.getBoolean("status");
+                users.add(new User(id,username,password,nameFind,phone,roleId,status));
+            }
+        } catch (SQLException e) {
+
+        }
+        return users;
     }
 
     @Override
