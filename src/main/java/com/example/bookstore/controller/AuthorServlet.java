@@ -32,9 +32,24 @@ public class AuthorServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "delete":
+                try {
+                    showDelete(request,response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             default:
                 showList(request, response);
         }
+    }
+
+    private void showDelete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("author/delete.jsp");
+        int id = Integer.parseInt(request.getParameter("id"));
+        Author author = authorService.findById(id);
+        request.setAttribute("authorDelete",author);
+        requestDispatcher.forward(request,response);
     }
 
     private void showEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -80,8 +95,21 @@ public class AuthorServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "delete":
+                try {
+                    deleteAuthor(request,response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
 
         }
+    }
+
+    private void deleteAuthor(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        authorService.delete(authorService.findById(id));
+        response.sendRedirect("/authors");
     }
 
     private void editAuthor(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

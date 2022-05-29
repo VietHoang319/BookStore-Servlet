@@ -116,7 +116,7 @@
                 <td>${i.id}</td>
                 <td>${i.name}</td>
                 <td><a href="/authors?action=edit&id=${i.id}">Sửa</a></td>
-                <td>Xóa</td>
+                <td><a href="/authors?action=delete&id=${i.id}">Xóa</a></td>
             </tr>
         </c:forEach>
     </table>
@@ -129,4 +129,5 @@
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
+
 </html>
