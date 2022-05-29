@@ -41,6 +41,15 @@ public class Book {
         this.numberOfBook = numberOfBook;
     }
 
+    public Book(String name, Author author, Category category, String image, int price, int numberOfBook) {
+        this.name = name;
+        this.author = author;
+        this.category = category;
+        this.image = image;
+        this.price = price;
+        this.numberOfBook = numberOfBook;
+    }
+
     public int getId() {
         return id;
     }

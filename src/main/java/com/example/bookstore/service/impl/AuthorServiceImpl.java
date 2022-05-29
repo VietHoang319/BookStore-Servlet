@@ -36,7 +36,7 @@ public class AuthorServiceImpl implements AuthorService {
 
 
         } catch (SQLException e) {
-
+            throw new RuntimeException(e);
         }
     }
 
@@ -47,7 +47,6 @@ public class AuthorServiceImpl implements AuthorService {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from author where id = ?;");){
             preparedStatement.setInt(1, id);
-            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int idFind = rs.getInt("id");
@@ -58,6 +57,7 @@ public class AuthorServiceImpl implements AuthorService {
             }
         }
         catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return author;
     }
@@ -67,7 +67,6 @@ public class AuthorServiceImpl implements AuthorService {
         List<Author> authors = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from author");) {
-            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

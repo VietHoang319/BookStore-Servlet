@@ -55,8 +55,8 @@
 
                 <ul>
                     <li><a href="about.html">Quản lý sách</a></li>
-                    <li><a href="blog.html">Quản lý tác giả</a></li>
-                    <li><a href="testimonials.html">Quản lý người dùng</a></li>
+                    <li><a href="/authors">Quản lý tác giả</a></li>
+                    <li><a href="testimonials.html">Quản lý khách hàng</a></li>
                     <li><a href="terms.html">Quản lý nhân viên</a></li>
                 </ul>
             </li>

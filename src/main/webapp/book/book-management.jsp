@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Viet Hoang Ngo
-  Date: 5/27/2022
-  Time: 10:00 AM
+  Date: 5/28/2022
+  Time: 2:18 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -71,21 +71,71 @@
     <div id="main">
         <div class="inner">
             <form method="">
-                <a href="/books"><h1 style="display: inline">Tất Cả Sách</h1></a>
+                <a href="/book-management"><h1 style="display: inline">Quản Lý Sách</h1></a>
                 <input type="submit" value="search" name="action" style="display: inline; float: right">
-                <input type="text" name="name" placeholder="Nhập tên sách mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
+                <input type="text" name="name" placeholder="Nhập tên sách mà bạn muốn tìm"
+                       style="display: inline; float: right; width: 30%">
             </form>
-            <div class="image main">
-                <img src="images/banner-image-6-1920x500.jpg" class="img-fluid" alt=""/>
+            <div style="margin-bottom: 20px">
+                <button type="button" data-toggle="modal" data-target="#staticBackdrop" style="width: 30%;">
+                    Thêm sách
+                </button>
+            </div>
+            <hr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Thêm sách</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <label>Nhập tên sách </label><input type="text" name="name" placeholder="Nhập tên sách">
+                                <label>Chọn tác giả</label>
+                                <select class="form-control" name="authorId">
+                                    <option></option>
+                                    <c:forEach var="author" items="${authors}">
+                                        <option value="${author.id}">${author.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <label>Chọn thể loại</label>
+                                <select class="form-control" name="categoryId">
+                                    <option></option>
+                                    <c:forEach var="category" items="${categories}">
+                                        <option value="${category.id}">${category.name}</option>
+                                    </c:forEach>
+                                </select>
+                                <label>Chọn ảnh</label>
+                                <input type="text" name="image">
+                                <input type="file" name="file" id="file">
+                                <label></label>
+                                <label for="price" style="float: left">Nhập giá</label>
+                                <input type="text" name="price" id="price" placeholder="Nhập giá sách">
+                                <label>Nhập số lượng sách</label>
+                                <input type="text" name="numberOfBook" placeholder="Nhập số lượng sách">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-dismiss="modal">Hủy</button>
+                                <input type="submit" name="action" value="Thêm">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <!-- Products -->
             <section class="tiles">
                 <c:forEach var="book" items="${books}">
                     <article class="style2">
-									<span class="image">
-										<img src="${book.image}" alt="" height="425px"/>
-									</span>
+            									<span class="image">
+            										<img src="${book.image}" alt="" height="425px"/>
+            									</span>
                         <a href="/book-details?id=${book.id}">
                             <h2>${book.name}</h2>
 

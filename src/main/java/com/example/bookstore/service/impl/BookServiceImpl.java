@@ -29,7 +29,18 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void add(Book book) throws SQLException {
-
+        String insertBook = "insert into book(name, authorId, categoryId, image, price, numberOfBook, status) values (?,?,?,?,?,?,true);";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(insertBook)){
+            preparedStatement.setString(1, book.getName());
+            preparedStatement.setString(2, String.valueOf(book.getAuthor().getId()));
+            preparedStatement.setString(3, String.valueOf(book.getCategory().getId()));
+            preparedStatement.setString(4, book.getImage());
+            preparedStatement.setString(5, String.valueOf(book.getPrice()));
+            preparedStatement.setString(6, String.valueOf(book.getNumberOfBook()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
