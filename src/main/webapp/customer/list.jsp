@@ -1,12 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Viet Hoang Ngo
-  Date: 5/27/2022
-  Time: 10:00 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -18,6 +11,45 @@
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -28,8 +60,8 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="/" class="logo">
-                <span class="fa fa-book"></span> <span class="title">Nhà sách bông bông</span>
+            <a href="index.html" class="logo">
+                <span class="fa fa-book"></span> <span class="title">Book Online Store Website</span>
             </a>
 
             <!-- Nav -->
@@ -70,32 +102,29 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <form method="">
-                <a href="/books"><h1 style="display: inline">Tất Cả Sách</h1></a>
+            <form method="post">
+                <a href="/customers"><h1 style="display: inline">Quản lý Khách Hàng</h1></a>
                 <input type="submit" value="search" name="action" style="display: inline; float: right">
-                <input type="text" name="name" placeholder="Nhập tên sách mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
+                <input type="text" name="name" placeholder="Nhập tên khách hàng mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
             </form>
-            <div class="image main">
-                <img src="images/banner-image-6-1920x500.jpg" class="img-fluid" alt=""/>
-            </div>
-
-            <!-- Products -->
-            <section class="tiles">
-                <c:forEach var="book" items="${books}">
-                    <article class="style2">
-									<span class="image">
-										<img src="${book.image}" alt="" height="425px"/>
-									</span>
-                        <a href="/book-details?id=${book.id}">
-                            <h2>${book.name}</h2>
-
-                            <p>
-                                <strong>${book.price} đồng</strong>
-                            </p>
-                        </a>
-                    </article>
+            <table>
+                <tr>
+                    <th>Tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Chức vụ</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <c:forEach var="i" begin="0" end="${users.size()-1}">
+                    <tr>
+                        <td>${users.get(i).name}</td>
+                        <td>${users.get(i).phone}</td>
+                        <td>${roles.get(i).name}</td>
+                        <td><a href="/customers?action=edit&id=${users.get(i).id}">Sửa</a></td>
+                        <td><a href="/customers?action=delete&id=${users.get(i).id}">Xoá</a></td>
+                    </tr>
                 </c:forEach>
-            </section>
+            </table>
         </div>
     </div>
 
@@ -104,9 +133,13 @@
         <div class="inner">
             <section>
                 <ul class="icons">
+                    <li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
                     <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
                     <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
                 </ul>
+
+                &nbsp;
             </section>
 
             <ul class="copyright">
@@ -115,6 +148,7 @@
             </ul>
         </div>
     </footer>
+
 </div>
 
 <!-- Scripts -->
