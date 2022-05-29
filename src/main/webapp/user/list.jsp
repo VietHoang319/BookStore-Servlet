@@ -11,6 +11,11 @@
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
+<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">--%>
+<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--%>
+<%--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--%>
+<%--    <meta charset="utf-8"/>--%>
     <style>
         .modal {
             display: none; /* Hidden by default */
@@ -104,7 +109,7 @@
         <div class="inner">
             <form method="get">
                 <a href="/users"><h1 style="display: inline">Quản lý nhân viên </h1></a>
-                <input type="submit" value="search" name="action" style="display: inline; float: right">
+                <input type="submit" value="search" name="action" style="display: inline; float: right" >
                 <input type="text" name="name" placeholder="Nhập tên nhân viên mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
             </form>
         <%-- Tạo--%>
@@ -112,53 +117,46 @@
                 <button id="myBtn">Tạo Mới</button>
             </div>
             <!-- The Modal -->
-            <div id="myModal" class="modal">
+            <div id="myModal" class="modal" >
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form method="post">
+                    <form method="post" class="col-md-12 bg-light p-3 my-3">
+                        <h1 class="text-center text-uppercase h3">Đăng kí nhân viên</h1>
                         <input type="hidden" name="action" value="create">
                         <input type="hidden" name="id">
-                        Username <input type="text" name="username">
-                        Password <input type="password" name="password">
-                        Name <input type="text" name="name">
-                        Phone <input type="text" name="phone">
-                        <%--                        <input type="text" name="roleId"> Role--%>
-                        <select name="roleId">
-                            <option value="1">quản lý</option>
-                            <option value="2">nhân viên</option>
-<%--                            <option value="3">khách hàng</option>--%>
-                        </select>
-                         <input type="hidden" name="status" value="true">
-<%--                        <select name="status">--%>
-<%--                            <option value="0">false</option>--%>
-<%--                            <option value="1">true</option>--%>
-<%--                        </select>--%>
-                        <div style="text-align: center;margin-top: 20px">
-                            <button>Tạo</button>
+                        <div class="form-group">
+                            <label for="username">Tên tài khoản</label>
+                            <input type="text" name="username" id="username" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Tên hiển thị</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" name="phone" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Chức vụ </label>
+                            <select name="roleId" id="role">
+                                <option value="1">quản lý</option>
+                                <option value="2">nhân viên</option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="status" value="true">
+                        <input type="submit" value="Tạo" class="btn-primary btn-block btn">
                     </form>
                 </div>
             </div>
-            <script>
-                let modal = document.getElementById("myModal");
-                let btn = document.getElementById("myBtn");
-                let span = document.getElementsByClassName("close")[0];
-                btn.onclick = function () {
-                    modal.style.display = "block";
-                }
-                span.onclick = function () {
-                    modal.style.display = "none";
-                }
-                window.onclick = function (event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
-            </script>
             <!-- Staffs -->
             <table>
                 <tr>
-                    <th>Tên</th>
+                    <th>Tài khoản</th>
+                    <th>Tên hiển thị</th>
                     <th>Số điện thoại</th>
                     <th>Chức vụ</th>
                     <th></th>
@@ -166,11 +164,12 @@
                 </tr>
                 <c:forEach var="i" begin="0" end="${users.size()-1}">
                     <tr>
+                        <td>${users.get(i).username}</td>
                         <td>${users.get(i).name}</td>
                         <td>${users.get(i).phone}</td>
                         <td>${roles.get(i).name}</td>
-                        <td><a href="/users?action=edit&id=${users.get(i).id}">Sửa</a></td>
-                        <td><a href="/users?action=delete&id=${users.get(i).id}">Xoá</a></td>
+                        <td><a href="/users?action=edit&id=${users.get(i).id}" class="btn btn-secondary">Sửa</a></td>
+                        <td><a href="/users?action=delete&id=${users.get(i).id}" class="btn btn-danger">Xoá</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -207,4 +206,20 @@
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
+<script>
+    let modal = document.getElementById("myModal");
+    let btn = document.getElementById("myBtn");
+    let span = document.getElementsByClassName("close")[0];
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 </html>

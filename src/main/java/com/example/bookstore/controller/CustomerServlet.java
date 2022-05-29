@@ -25,9 +25,22 @@ public class CustomerServlet extends HttpServlet {
             action = "";
         }
         switch (action){
+            case "search":
+                showSearchCustomer(request,response);
+                break;
             default:
                 showCustomerList(request,response);
         }
+    }
+
+    private void showSearchCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/list.jsp");
+        String name = request.getParameter("name");
+        List<User> users = customerService.findByName(name);
+        List<Role> roles = roleService.findAllUser(users);
+        request.setAttribute("users",users);
+        request.setAttribute("roles",roles);
+        requestDispatcher.forward(request,response);
     }
 
     private void showCustomerList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

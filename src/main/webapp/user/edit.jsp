@@ -9,23 +9,51 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta charset="utf-8"/>
 </head>
 <body>
-<form method="post">
-    <input type="hidden" name="action" value="edit">
-    <input type="hidden" name="id" value="${users.id}">
-    <input type="hidden" name="username" value="${users.username}">
-    Tên <br>
-    <input type="text" name="name" value="${users.name}"> <br>
-    <input type="text" name="password" value="${users.password}">
-    Số điện thoại <br>
-    <input type="text" name="phone" value="${users.phone}"> <br>
-    <select name="roleId">
-        <option value="1">quản lý</option>
-        <option value="2">nhân viên</option>
-    </select>
-   <input type="hidden" name="status" value="${users.status}">
-    <button>Sửa</button>
-</form>
+<div id="wrapper">
+    <div class="container">
+        <div class="row justify-content-around">
+            <form method="post" class="col-md-6 bg-light p-3 my-3">
+                <h1 class="text-center text-uppercase h3">Sửa thông tin nhân viên</h1>
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id">
+                <div class="form-group">
+                    <label for="username">Tên tài khoản</label>
+                    <input type="text" name="username" id="username" class="form-control" value="${users.username}">
+                </div>
+                <div class="form-group">
+                    <label for="password" >Mật khẩu</label>
+                    <input type="text" name="password" id="password" class="form-control" value="${users.password}">
+                </div>
+                <div class="form-group">
+                    <label for="name">Tên hiển thị</label>
+                    <input type="text" name="name" id="name" class="form-control" value="${users.name}">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" name="phone" id="phone" class="form-control" value="${users.phone}">
+                </div>
+                <div class="form-group">
+                    <label for="role">Chức vụ </label>
+                    <select name="roleId" id="role">
+                        <option value="1">quản lý</option>
+                        <option value="2">nhân viên</option>
+                    </select>
+                </div>
+                <input type="hidden" name="status" value="true">
+                <input type="submit" value="Sửa" class="btn-primary btn-block btn">
+            </form>
+        </div>
+    </div>
+</div></form>
 </body>
+<script>
+
+</script>
 </html>
