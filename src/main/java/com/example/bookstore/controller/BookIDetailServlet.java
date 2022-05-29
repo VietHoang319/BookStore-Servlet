@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "BookDetailServlet", value = "/book-details")
-public class BookDetailServlet extends HttpServlet {
+public class BookIDetailServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

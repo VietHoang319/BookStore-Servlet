@@ -114,7 +114,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean delete(int id) throws SQLException {
-        return false;
+        boolean rowDeleted;
+        String deleteBook = "update book set status = false where id = ?;";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(deleteBook)){
+            preparedStatement.setString(1, String.valueOf(id));
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        }
+        return rowDeleted;
     }
 
     @Override

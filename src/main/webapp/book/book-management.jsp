@@ -136,7 +136,7 @@
             									<span class="image">
             										<img src="${book.image}" alt="" height="425px"/>
             									</span>
-                        <a href="/book-details?id=${book.id}">
+                        <a href="/book-infors?id=${book.id}">
                             <h2>${book.name}</h2>
 
                             <p>
