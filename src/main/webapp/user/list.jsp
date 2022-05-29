@@ -83,24 +83,24 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="contact.html">Người dùng</a></li>
+            <li><a href="" class="active">Trang chủ</a></li>
 
-            <li><a href="products.html" class="active">Product</a></li>
-
-            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="/books">Sách</a></li>
 
             <li>
-                <a href="#" class="dropdown-toggle">About</a>
+                <a href="" class="dropdown-toggle">Quản lý</a>
 
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="/book-management">Quản lý sách</a></li>
+                    <li><a href="/authors">Quản lý tác giả</a></li>
+                    <li><a href="/customers">Quản lý khách hàng</a></li>
+                    <li><a href="/users">Quản lý nhân viên</a></li>
                 </ul>
             </li>
 
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+            <li><a href="contact.html">Đăng xuất</a></li>
         </ul>
     </nav>
 

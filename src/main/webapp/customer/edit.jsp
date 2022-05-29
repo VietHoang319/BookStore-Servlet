@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row justify-content-around">
             <form method="post" class="col-md-6 bg-light p-3 my-3">
-                <h1 class="text-center text-uppercase h3">Sửa thông tin nhân viên</h1>
+                <h1 class="text-center text-uppercase h3">Sửa thông tin khách hàng</h1>
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="id">
                 <div class="form-group">
@@ -40,11 +40,7 @@
                     <input type="text" name="phone" id="phone" class="form-control" value="${users.phone}">
                 </div>
                 <div class="form-group">
-                    <label for="role">Chức vụ </label>
-                    <select name="roleId" id="role">
-                        <option value="1">quản lý</option>
-                        <option value="2">nhân viên</option>
-                    </select>
+                    <input type="hidden" name="roleId" value="3">
                 </div>
                 <input type="hidden" name="status" value="true">
                 <input type="submit" value="Sửa" class="btn-primary btn-block btn">

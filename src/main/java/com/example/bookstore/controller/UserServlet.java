@@ -128,6 +128,7 @@ public class UserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
+//        if (userService.findByUserName(username).equals(username))
         userService.add(new User(username,password,name,phone,roleId,status));
         response.sendRedirect("/users");
     }

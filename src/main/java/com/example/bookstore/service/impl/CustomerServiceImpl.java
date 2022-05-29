@@ -20,16 +20,17 @@ public class CustomerServiceImpl implements UserService {
         }
         return connection;
     }
+
     @Override
     public void add(User user) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("insert into user(username,password,name,phone,roleId,status ) values (?,?,?,?,?,? )");) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3,user.getName());
-            preparedStatement.setString(4,user.getPhone());
-            preparedStatement.setInt(5,user.getRoleId());
-            preparedStatement.setBoolean(6,user.isStatus());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getPhone());
+            preparedStatement.setInt(5, user.getRoleId());
+            preparedStatement.setBoolean(6, user.isStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
 
@@ -39,14 +40,31 @@ public class CustomerServiceImpl implements UserService {
 
     @Override
     public User findById(int id) {
-        return null;
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id =?");) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String name = rs.getString("name");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("roleId");
+                boolean status = rs.getBoolean("status");
+                user = new User(id, username, password,name,phone,roleId,status);
+            }
+        } catch (SQLException e) {
+        }
+        return user;
     }
 
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where roleId=3 and status=true" );) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where roleId=3 and status=true");) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -57,7 +75,7 @@ public class CustomerServiceImpl implements UserService {
                 String phone = rs.getString("phone");
                 int roleId = rs.getInt("roleId");
                 boolean status = rs.getBoolean("status");
-                users.add(new User(id, username, password,name,phone,roleId,status));
+                users.add(new User(id, username, password, name, phone, roleId, status));
             }
         } catch (SQLException e) {
 
@@ -70,7 +88,7 @@ public class CustomerServiceImpl implements UserService {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where roleId=3 and name like ? and status = true; ");) {
-            preparedStatement.setString(1, '%'+name+'%');
+            preparedStatement.setString(1, '%' + name + '%');
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -81,14 +99,22 @@ public class CustomerServiceImpl implements UserService {
                 String phone = rs.getString("phone");
                 int roleId = rs.getInt("roleId");
                 boolean status = rs.getBoolean("status");
-                users.add(new User(id,username,password,nameFind,phone,roleId,status));
+                users.add(new User(id, username, password, nameFind, phone, roleId, status));
             }
         } catch (SQLException e) {
 
         }
         return users;
     }
-
+    public boolean delete(User user) throws SQLException{
+        boolean rowDeleted;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set status=false where id=?;");) {
+            preparedStatement.setInt(1, user.getId());
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        }
+        return rowDeleted;
+    }
     @Override
     public boolean delete(int id) throws SQLException {
         return false;
@@ -96,6 +122,16 @@ public class CustomerServiceImpl implements UserService {
 
     @Override
     public boolean update(User user) throws SQLException {
-        return false;
+        boolean rowUpdated;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?,name=?,phone =?,roleId=? where id=?;");) {
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getPhone());
+            preparedStatement.setInt(4, user.getRoleId());
+            preparedStatement.setInt(5, user.getId());
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        }
+        return rowUpdated;
     }
 }
