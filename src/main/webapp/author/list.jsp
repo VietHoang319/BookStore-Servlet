@@ -115,12 +115,31 @@
             <tr>
                 <td>${i.id}</td>
                 <td>${i.name}</td>
-                <td><a href="/authors?action=edit&id=${i.id}">Sửa</a></td>
-                <td><a href="/authors?action=delete&id=${i.id}">Xóa</a></td>
+                <td><a href="/authors?action=edit&id=${i.id} " class="btn btn-secondary">Sửa</a></td>
+                <td><a href="/authors?action=delete&id=${i.id}" class="btn btn-secondary">Xóa</a></td>
             </tr>
         </c:forEach>
     </table>
 </div>
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <ul class="icons">
+                <li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            </ul>
+
+            &nbsp;
+        </section>
+
+        <ul class="copyright">
+            <li>Copyright © 2020 Company Name </li>
+            <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+        </ul>
+    </div>
+</footer>
 
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
@@ -129,5 +148,4 @@
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
-
 </html>
