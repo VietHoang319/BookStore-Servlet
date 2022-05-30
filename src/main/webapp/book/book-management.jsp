@@ -111,20 +111,21 @@
                                         <option value="${category.id}">${category.name}</option>
                                     </c:forEach>
                                 </select>
-                                <label>Chọn ảnh</label>
-                                <input type="text" name="image">
-                                <input type="file" name="file" id="file">
                                 <label></label>
                                 <label for="price" style="float: left">Nhập giá</label>
                                 <input type="text" name="price" id="price" placeholder="Nhập giá sách">
                                 <label>Nhập số lượng sách</label>
                                 <input type="text" name="numberOfBook" placeholder="Nhập số lượng sách">
+                                <label>Chọn ảnh</label>
+                                <input type="text" id="fileName" name="image">
+                                <input type="file" id="file" name="file" style="display: none">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" data-dismiss="modal">Hủy</button>
                                 <input type="submit" name="action" value="Thêm">
                             </div>
                         </form>
+                        <input type="file" name="file" id="upload" onchange="upload()">
                     </div>
                 </div>
             </div>
@@ -168,6 +169,20 @@
 </div>
 
 <!-- Scripts -->
+<script>
+    function upload() {
+        var fullPath = document.getElementById('upload').value;
+        if (fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            document.getElementById('fileName').value = filename;
+            document.getElementById('file').value = filename;
+        }
+    }
+</script>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>

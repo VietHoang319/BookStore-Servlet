@@ -62,7 +62,6 @@ public class BookManagementServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-
             case "Thêm":
                 try {
                     createBook(request, response);
@@ -82,13 +81,9 @@ public class BookManagementServlet extends HttpServlet {
         String imageText = request.getParameter("image");
         int price = Integer.parseInt(request.getParameter("price"));
         int numberOfBook = Integer.parseInt(request.getParameter("numberOfBook"));
-        String filePart = "";
-//        for (Part part : request.getParts()) {
-//            String fileName = extractFileName(part);
-//            fileName = new File(fileName).getName();
-//            filePart = this.getFolderUpload() + File.separator + fileName;
-//            part.write(filePart);
-//        }
+        for (Part part : request.getParts()) {
+            part.write(this.getFolderUpload().getAbsolutePath() + File.separator + imageText);
+        }
         bookService.add(new Book(name, author, category, imageText, price, numberOfBook));
         response.sendRedirect("/book-management");
     }
