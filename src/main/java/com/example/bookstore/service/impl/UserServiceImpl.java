@@ -112,7 +112,28 @@ public class UserServiceImpl implements UserService {
         }
         return users;
     }
+    public User findByUserName(String name) {
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where name = ? and status = true; ");) {
+            preparedStatement.setString(1, name);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usernameFind = rs.getString("username");
+                String password = rs.getString("password");
+                String nameFind = rs.getString("name");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("roleId");
+                boolean status = rs.getBoolean("status");
+                user=(new User(id,usernameFind,password,nameFind,phone,roleId,status));
+            }
+        } catch (SQLException e) {
 
+        }
+        return user;
+    }
     @Override
     public boolean delete(int id) throws SQLException {
         boolean rowDeleted;
@@ -135,11 +156,12 @@ public class UserServiceImpl implements UserService {
     public boolean update(User user) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update user set name=?,phone =?,roleId=? where id=?;");) {
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPhone());
-            preparedStatement.setInt(3, user.getRoleId());
-            preparedStatement.setInt(4, user.getId());
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?,name=?,phone =?,roleId=? where id=?;");) {
+            preparedStatement.setString(1,user.getPassword());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getPhone());
+            preparedStatement.setInt(4, user.getRoleId());
+            preparedStatement.setInt(5, user.getId());
             rowUpdated = preparedStatement.executeUpdate() > 0;
         }
         return rowUpdated;

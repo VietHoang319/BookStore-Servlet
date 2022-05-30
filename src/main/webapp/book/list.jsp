@@ -46,24 +46,26 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="contact.html">Người dùng</a></li>
             <li><a href="" class="active">Trang chủ</a></li>
-
+            <c:if test="${name!= null}">
+                <li><a href="contact.html">${name}</a></li>
+            </c:if>
             <li><a href="/books">Sách</a></li>
-
-            <li>
-                <a href="" class="dropdown-toggle">Quản lý</a>
-
-                <ul>
-                    <li><a href="/book-management">Quản lý sách</a></li>
-                    <li><a href="/authors">Quản lý tác giả</a></li>
-                    <li><a href="/customers">Quản lý khách hàng</a></li>
-                    <li><a href="/users">Quản lý nhân viên</a></li>
-                </ul>
-            </li>
-
+            <c:if test="${name!= null &&roleId==1 ||roleId==2}">
+                <li>
+                    <a href="" class="dropdown-toggle">Quản lý</a>
+                    <ul>
+                        <li><a href="/book-management">Quản lý sách</a></li>
+                        <li><a href="/authors">Quản lý tác giả</a></li>
+                        <li><a href="/customers">Quản lý khách hàng</a></li>
+                        <li><a href="/users">Quản lý nhân viên</a></li>
+                    </ul>
+                </li>
+            </c:if>
+            <c:if test="${name!=null}">
+                <li><a href="/">Đăng xuất</a></li>
+            </c:if>
             <li><a href="contact.html">Liên hệ</a></li>
-            <li><a href="contact.html">Đăng xuất</a></li>
         </ul>
     </nav>
 
@@ -73,7 +75,8 @@
             <form method="">
                 <a href="/books"><h1 style="display: inline">Tất Cả Sách</h1></a>
                 <input type="submit" value="search" name="action" style="display: inline; float: right">
-                <input type="text" name="name" placeholder="Nhập tên sách mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
+                <input type="text" name="name" placeholder="Nhập tên sách mà bạn muốn tìm"
+                       style="display: inline; float: right; width: 30%">
             </form>
             <div class="image main">
                 <img src="images/banner-image-6-1920x500.jpg" class="img-fluid" alt=""/>

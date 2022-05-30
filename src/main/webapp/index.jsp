@@ -1,13 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
     <title>PHPJabbers.com | Free Book Online Store Website Template</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css"/>
+    </noscript>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -36,24 +39,29 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="contact.html">Người dùng</a></li>
-            <li><a href="" class="active">Trang chủ</a></li>
-
+            <c:if test="${name == null}">
+                <li><a href="logins">Login</a></li>
+            </c:if>
+            <li><a href="/" class="active">Trang chủ</a></li>
+            <c:if test="${name!=null}">
+                <li><a href="/users?action=view">${name}</a></li>
+            </c:if>
             <li><a href="/books">Sách</a></li>
-
-            <li>
-                <a href="" class="dropdown-toggle">Quản lý</a>
-
-                <ul>
-                    <li><a href="/book-management">Quản lý sách</a></li>
-                    <li><a href="/authors">Quản lý tác giả</a></li>
-                    <li><a href="/customers">Quản lý khách hàng</a></li>
-                    <li><a href="/users">Quản lý nhân viên</a></li>
-                </ul>
-            </li>
-
+            <c:if test="${name != null && (roleId==1 ||roleId==2)}">
+                <li>
+                    <a href="" class="dropdown-toggle">Quản lý</a>
+                    <ul>
+                        <li><a href="/book-management">Quản lý sách</a></li>
+                        <li><a href="/authors">Quản lý tác giả</a></li>
+                        <li><a href="/customers">Quản lý khách hàng</a></li>
+                        <li><a href="/users">Quản lý nhân viên</a></li>
+                    </ul>
+                </li>
+            </c:if>
+            <c:if test="${name != null}">
+                <li><a href="/logins?action=logout">Đăng xuất</a></li>
+            </c:if>
             <li><a href="contact.html">Liên hệ</a></li>
-            <li><a href="contact.html">Đăng xuất</a></li>
         </ul>
     </nav>
 
@@ -94,7 +102,9 @@
             <!-- About Us -->
             <header id="inner">
                 <h1>Thư gửi đến bạn đọc</h1>
-                <p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
+                <p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus
+                    arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros aliquam.
+                    Lorem ipsum dolor sit amet nullam dolore.</p>
             </header>
 
             <br>
@@ -105,36 +115,42 @@
             <section class="tiles">
                 <article class="style1">
 									<span class="image">
-										<img src="images/product-1-720x480.jpg" alt="" />
+										<img src="images/product-1-720x480.jpg" alt=""/>
 									</span>
                     <a href="product-details.html">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
 
-                        <p><del>$19.00</del> <strong>$19.00</strong></p>
+                        <p>
+                            <del>$19.00</del>
+                            <strong>$19.00</strong></p>
 
                         <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
                     </a>
                 </article>
                 <article class="style2">
 									<span class="image">
-										<img src="images/product-2-720x480.jpg" alt="" />
+										<img src="images/product-2-720x480.jpg" alt=""/>
 									</span>
                     <a href="product-details.html">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
 
-                        <p><del>$19.00</del> <strong>$19.00</strong></p>
+                        <p>
+                            <del>$19.00</del>
+                            <strong>$19.00</strong></p>
 
                         <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
                     </a>
                 </article>
                 <article class="style3">
 									<span class="image">
-										<img src="images/product-3-720x480.jpg" alt="" />
+										<img src="images/product-3-720x480.jpg" alt=""/>
 									</span>
                     <a href="product-details.html">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
 
-                        <p><del>$19.00</del> <strong>$19.00</strong></p>
+                        <p>
+                            <del>$19.00</del>
+                            <strong>$19.00</strong></p>
 
                         <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
                     </a>
@@ -142,12 +158,14 @@
 
                 <article class="style4">
 									<span class="image">
-										<img src="images/product-4-720x480.jpg" alt="" />
+										<img src="images/product-4-720x480.jpg" alt=""/>
 									</span>
                     <a href="product-details.html">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
 
-                        <p><del>$19.00</del> <strong>$19.00</strong></p>
+                        <p>
+                            <del>$19.00</del>
+                            <strong>$19.00</strong></p>
 
                         <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
                     </a>
@@ -155,12 +173,14 @@
 
                 <article class="style5">
 									<span class="image">
-										<img src="images/product-5-720x480.jpg" alt="" />
+										<img src="images/product-5-720x480.jpg" alt=""/>
 									</span>
                     <a href="product-details.html">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
 
-                        <p><del>$19.00</del> <strong>$19.00</strong></p>
+                        <p>
+                            <del>$19.00</del>
+                            <strong>$19.00</strong></p>
 
                         <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
                     </a>
@@ -168,12 +188,14 @@
 
                 <article class="style6">
 									<span class="image">
-										<img src="images/product-6-720x480.jpg" alt="" />
+										<img src="images/product-6-720x480.jpg" alt=""/>
 									</span>
                     <a href="product-details.html">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
 
-                        <p><del>$19.00</del> <strong>$19.00</strong></p>
+                        <p>
+                            <del>$19.00</del>
+                            <strong>$19.00</strong></p>
 
                         <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
                     </a>
@@ -195,8 +217,10 @@
 
                 <ul class="alt">
                     <li><span class="fa fa-envelope-o"></span> <a href="#">contact@doublebongbookstore.com</a></li>
-                    <li><span class="fa fa-phone"></span> +1 333 4040 5566 </li>
-                    <li><span class="fa fa-map-pin"></span> 212 Barrington Court New York, ABC 10001 United States of America</li>
+                    <li><span class="fa fa-phone"></span> +1 333 4040 5566</li>
+                    <li><span class="fa fa-map-pin"></span> 212 Barrington Court New York, ABC 10001 United States of
+                        America
+                    </li>
                 </ul>
 
                 <h2>Follow Us</h2>
@@ -208,7 +232,7 @@
             </section>
 
             <ul class="copyright">
-                <li>Copyright © 2020 Company Name </li>
+                <li>Copyright © 2020 Company Name</li>
                 <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
             </ul>
         </div>

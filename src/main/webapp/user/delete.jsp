@@ -11,9 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post">
-    <h4>${users.status}</h4>
-    <button>Xoá</button>
-</form>
+<%--<form method="post">--%>
+<%--    <h4>${users.status}</h4>--%>
+<%--    <button>Xoá</button>--%>
+<%--</form>--%>
 </body>
 </html>

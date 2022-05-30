@@ -80,12 +80,9 @@
         <ul>
             <li><a href="contact.html">Người dùng</a></li>
             <li><a href="" class="active">Trang chủ</a></li>
-
             <li><a href="/books">Sách</a></li>
-
             <li>
                 <a href="" class="dropdown-toggle">Quản lý</a>
-
                 <ul>
                     <li><a href="/book-management">Quản lý sách</a></li>
                     <li><a href="/authors">Quản lý tác giả</a></li>
@@ -93,7 +90,6 @@
                     <li><a href="/users">Quản lý nhân viên</a></li>
                 </ul>
             </li>
-
             <li><a href="contact.html">Liên hệ</a></li>
             <li><a href="contact.html">Đăng xuất</a></li>
         </ul>
@@ -102,14 +98,15 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <form method="post">
+            <form method="get">
                 <a href="/customers"><h1 style="display: inline">Quản lý Khách Hàng</h1></a>
                 <input type="submit" value="search" name="action" style="display: inline; float: right">
                 <input type="text" name="name" placeholder="Nhập tên khách hàng mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
             </form>
             <table>
                 <tr>
-                    <th>Tên</th>
+                    <th>Tài khoản</th>
+                    <th>Tên hiển thị</th>
                     <th>Số điện thoại</th>
                     <th>Chức vụ</th>
                     <th></th>
@@ -117,11 +114,18 @@
                 </tr>
                 <c:forEach var="i" begin="0" end="${users.size()-1}">
                     <tr>
+                        <td>${users.get(i).username}</td>
                         <td>${users.get(i).name}</td>
                         <td>${users.get(i).phone}</td>
                         <td>${roles.get(i).name}</td>
-                        <td><a href="/customers?action=edit&id=${users.get(i).id}">Sửa</a></td>
-                        <td><a href="/customers?action=delete&id=${users.get(i).id}">Xoá</a></td>
+                        <td><a href="/customers?action=edit&id=${users.get(i).id}" class="btn btn-secondary">Sửa</a></td>
+                        <td>
+                            <form action="/customers" method="get" id="delete${users.get(i).id}" style="display: inline">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="id" value="${users.get(i).id}">
+                                <a class="btn btn-danger" onclick="acceptDelete(${users.get(i).id})">Xoá</a>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
@@ -158,4 +162,12 @@
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
+<script>
+    function acceptDelete(id) {
+        if (confirm("Bạn có xác nhận xoá không ")){
+            alert("Xoá thành công");
+            document.getElementById("delete" +id).submit();
+        }else alert("Xoá thất bại")
+    }
+</script>
 </html>
