@@ -12,7 +12,7 @@ import java.util.Map;
 @WebServlet(name = "LoginServlet", urlPatterns = "/logins")
 public class LoginServlet extends HttpServlet {
     CustomerServiceImpl customerService = new CustomerServiceImpl();
-
+    static int currentId =0;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
                 showLoginForm(request, response);
         }
     }
+
 
     private void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("login/login.jsp");
@@ -62,7 +63,7 @@ public class LoginServlet extends HttpServlet {
         if (session.getAttribute("name")!=null){
             session.invalidate();
         }
-        response.sendRedirect("/homes");
+        response.sendRedirect("/home");
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
@@ -75,7 +76,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("phone",user.getPhone());
             session.setAttribute("name" , user.getName());
             session.setAttribute("roleId",user.getRoleId());
-            response.sendRedirect("/homes");
+            currentId = user.getId();
+            response.sendRedirect("/home");
         }
     }
 }

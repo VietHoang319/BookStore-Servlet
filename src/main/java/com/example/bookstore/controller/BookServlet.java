@@ -30,7 +30,6 @@ public class BookServlet extends HttpServlet {
                 showListBook(request, response);
         }
     }
-
     private void searchBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("book/list.jsp");
         String name = request.getParameter("name");

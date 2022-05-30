@@ -46,24 +46,30 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="contact.html">Người dùng</a></li>
+            <c:if test="${name == null}">
+                <li><a href="logins">Login</a></li>
+            </c:if>
+            <c:if test="${name !=null}">
+                <li><a href="contact.html">${name}</a></li>
+            </c:if>
             <li><a href="" class="active">Trang chủ</a></li>
-
             <li><a href="/books">Sách</a></li>
+            <c:if test="${name!=null&&(roleId==1 || roleId==2)}">
+                <li>
+                    <a href="" class="dropdown-toggle">Quản lý</a>
 
-            <li>
-                <a href="" class="dropdown-toggle">Quản lý</a>
-
-                <ul>
-                    <li><a href="/book-management">Quản lý sách</a></li>
-                    <li><a href="/authors">Quản lý tác giả</a></li>
-                    <li><a href="/customers">Quản lý khách hàng</a></li>
-                    <li><a href="/users">Quản lý nhân viên</a></li>
-                </ul>
-            </li>
-
+                    <ul>
+                        <li><a href="/book-management">Quản lý sách</a></li>
+                        <li><a href="/authors">Quản lý tác giả</a></li>
+                        <li><a href="/customers">Quản lý khách hàng</a></li>
+                        <li><a href="/users">Quản lý nhân viên</a></li>
+                    </ul>
+                </li>
+            </c:if>
             <li><a href="contact.html">Liên hệ</a></li>
-            <li><a href="contact.html">Đăng xuất</a></li>
+            <c:if test="${name != null}">
+                <li><a href="contact.html">Đăng xuất</a></li>
+            </c:if>
         </ul>
     </nav>
 

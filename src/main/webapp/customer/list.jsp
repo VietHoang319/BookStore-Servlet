@@ -78,7 +78,7 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="contact.html">Người dùng</a></li>
+            <li><a href="contact.html">${name}</a></li>
             <li><a href="" class="active">Trang chủ</a></li>
             <li><a href="/books">Sách</a></li>
             <li>

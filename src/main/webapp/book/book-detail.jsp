@@ -44,6 +44,9 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
+            <c:if test="${name == null}">
+                <li><a href="logins">Login</a></li>
+            </c:if>
             <c:if test="${name != null}">
                 <li><a href="contact.html">${name}</a></li>
             </c:if>
@@ -81,8 +84,8 @@
                     </div>
 
                     <div class="col-md-7">
-                        <p><strong>Tác giả: </strong><a href="#">${book.author.name}</a></p>
-                        <p><strong>Thể loại: </strong><a href="#">${book.category.name}</a></p>
+                        <p><strong>Tác giả: </strong><a href="book-details?action=searchAuthor&id=${book.author.id}">${book.author.name}</a></p>
+                        <p><strong>Thể loại: </strong><a href="book-details?action=searchCategory&id=${book.category.id}">${book.category.name}</a></p>
                         <p><strong>Số lượng sách còn trong kho: </strong>${book.numberOfBook} quyển</p>
 
                         <div class="row">

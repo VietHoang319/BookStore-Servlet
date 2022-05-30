@@ -46,6 +46,23 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return category;
     }
+    public Category findByName(int id) {
+        Category category = null ;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from category where id = ?;");){
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idFind = rs.getInt("id");
+                String name = rs.getString("name");
+                category = new Category(idFind, name);
+            }
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return category;
+    }
 
     @Override
     public List<Category> findAll() {
