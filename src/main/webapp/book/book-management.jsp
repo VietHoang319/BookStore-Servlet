@@ -47,12 +47,12 @@
         <h2>Menu</h2>
         <ul>
             <c:if test="${name == null}">
-                <li><a href="logins">Login</a></li>
+                <li><a href="logins">Đăng nhập</a></li>
             </c:if>
             <c:if test="${name !=null}">
                 <li><a href="contact.html">${name}</a></li>
             </c:if>
-            <li><a href="" class="active">Trang chủ</a></li>
+            <li><a href="/" class="active">Trang chủ</a></li>
             <li><a href="/books">Sách</a></li>
             <c:if test="${name!=null&&(roleId==1 || roleId==2)}">
                 <li>

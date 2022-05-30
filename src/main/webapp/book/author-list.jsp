@@ -49,12 +49,12 @@
             <c:if test="${name == null}">
                 <li><a href="logins">Login</a></li>
             </c:if>
-            <li><a href="" class="active">Trang chủ</a></li>
+            <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name!= null}">
                 <li><a href="contact.html">${name}</a></li>
             </c:if>
             <li><a href="/books">Sách</a></li>
-            <c:if test="${name!= null &&roleId==1 ||roleId==2}">
+            <c:if test="${name!= null &&(roleId==1 ||roleId==2)}">
                 <li>
                     <a href="" class="dropdown-toggle">Quản lý</a>
                     <ul>

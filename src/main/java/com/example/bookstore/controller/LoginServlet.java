@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
         if (session.getAttribute("name")!=null){
             session.invalidate();
         }
-        response.sendRedirect("/home");
+        response.sendRedirect("/");
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
@@ -77,7 +77,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("name" , user.getName());
             session.setAttribute("roleId",user.getRoleId());
             currentId = user.getId();
-            response.sendRedirect("/home");
+            response.sendRedirect("/");
         }
     }
 }
