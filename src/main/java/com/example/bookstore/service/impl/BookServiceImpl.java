@@ -125,6 +125,18 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean update(Book book) throws SQLException {
-        return false;
+        boolean rowEdit;
+        String editBook = "update book set name = ?, authorId = ?, categoryId = ?, image = ?, price = ?, numberOfBook = ? where id = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(editBook)){
+            preparedStatement.setString(1, book.getName());
+            preparedStatement.setString(2, String.valueOf(book.getAuthor().getId()));
+            preparedStatement.setString(3, String.valueOf(book.getCategory().getId()));
+            preparedStatement.setString(4, book.getImage());
+            preparedStatement.setString(5, String.valueOf(book.getPrice()));
+            preparedStatement.setString(6, String.valueOf(book.getNumberOfBook()));
+            preparedStatement.setString(7, String.valueOf(book.getId()));
+            rowEdit = preparedStatement.executeUpdate() > 0;
+        }
+        return rowEdit;
     }
 }

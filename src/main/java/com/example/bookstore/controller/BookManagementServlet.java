@@ -81,8 +81,12 @@ public class BookManagementServlet extends HttpServlet {
         String imageText = request.getParameter("image");
         int price = Integer.parseInt(request.getParameter("price"));
         int numberOfBook = Integer.parseInt(request.getParameter("numberOfBook"));
-        for (Part part : request.getParts()) {
-            part.write(this.getFolderUpload().getAbsolutePath() + File.separator + imageText);
+        if(!(imageText.contains("https://") || imageText.contains("E:\\CodeGym\\BookStore\\Upload"))) {
+//            imageText = this.getFolderUpload().getAbsolutePath() + File.separator + imageText;
+//            for (Part part : request.getParts()) {
+//                part.write(imageText);
+//            }
+            imageText = "Upload/" + imageText;
         }
         bookService.add(new Book(name, author, category, imageText, price, numberOfBook));
         response.sendRedirect("/book-management");

@@ -75,7 +75,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5" style="height: 310px; display:flex; justify-content: center">
-                        <img src="${book.image}" class="img-fluid" alt="" style="height: 100%">
+                        <img src="${book.image}" class="img-fluid" alt="Lỗi rồi" style="height: 100%">
                     </div>
 
                     <div class="col-md-7">
@@ -87,7 +87,8 @@
                             <div class="col-sm-11">
                                 <div class="row">
                                     <div>
-                                        <input type="button" class="primary" value="Sửa sách">
+                                        <button class="primary" data-toggle="modal" data-target="#staticBackdrop">Sửa sách</button>
+<%--                                        <input type="button" class="primary" value="Sửa sách">--%>
                                     </div>
                                     <div class="col-sm-6">
                                         <a href="/book-infors?action=delete&id=${book.id}"><input type="button" class="primary" value="Xóa sách"></a>
@@ -97,6 +98,55 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Sửa sách</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <label>Tên sách </label><input type="text" name="name" value="${book.name}">
+                        <label>Chọn tác giả</label>
+                        <select class="form-control" name="authorId">
+                            <option value="${book.author.id}">${book.author.name}</option>
+                            <c:forEach var="author" items="${authors}">
+                                <option value="${author.id}">${author.name}</option>
+                            </c:forEach>
+                        </select>
+                        <label>Chọn thể loại</label>
+                        <select class="form-control" name="categoryId">
+                            <option value="${book.category.id}">${book.category.name}</option>
+                            <c:forEach var="category" items="${categories}">
+                                <option value="${category.id}">${category.name}</option>
+                            </c:forEach>
+                        </select>
+                        <label></label>
+                        <label for="price" style="float: left">Nhập giá</label>
+                        <input type="text" name="price" id="price" value="${book.price}">
+                        <label>Nhập số lượng sách</label>
+                        <input type="text" name="numberOfBook" value="${book.numberOfBook}">
+                        <label>Chọn ảnh</label>
+                        <input type="text" id="fileName" name="image" value="${book.image}">
+                        <input type="file" id="file" name="file" style="display: none">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal">Hủy</button>
+                        <input type="submit" name="action" value="Sửa">
+                    </div>
+                </form>
+                <div>
+                    <input type="file" name="file" id="upload" onchange="upload()"></div>
+                <div style="color: white">error404error404error404error404error404error404error404error404error404error404error404error404error404error404error404</div>
             </div>
         </div>
     </div>
@@ -128,6 +178,6 @@
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-
+<script src="assets/js/upload.js"></script>
 </body>
 </html>

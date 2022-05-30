@@ -96,6 +96,7 @@
                         </div>
                         <form method="post" enctype="multipart/form-data">
                             <div class="modal-body">
+                                <input type="hidden" value="${book.id}" name="id">
                                 <label>Nhập tên sách </label><input type="text" name="name" placeholder="Nhập tên sách">
                                 <label>Chọn tác giả</label>
                                 <select class="form-control" name="authorId">
@@ -125,7 +126,11 @@
                                 <input type="submit" name="action" value="Thêm">
                             </div>
                         </form>
-                        <input type="file" name="file" id="upload" onchange="upload()">
+                        <div>
+                            <input type="file" name="file" id="upload" onchange="upload()"></div>
+                        <div style="color: white">
+                            error404error404error404error404error404error404error404error404error404error404error404error404error404error404error404
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +140,7 @@
                 <c:forEach var="book" items="${books}">
                     <article class="style2">
             									<span class="image">
-            										<img src="${book.image}" alt="" height="425px"/>
+                                                    <img src="${book.image}" alt="" height="425px"/>
             									</span>
                         <a href="/book-infors?id=${book.id}">
                             <h2>${book.name}</h2>
@@ -169,20 +174,7 @@
 </div>
 
 <!-- Scripts -->
-<script>
-    function upload() {
-        var fullPath = document.getElementById('upload').value;
-        if (fullPath) {
-            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-            var filename = fullPath.substring(startIndex);
-            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                filename = filename.substring(1);
-            }
-            document.getElementById('fileName').value = filename;
-            document.getElementById('file').value = filename;
-        }
-    }
-</script>
+<script src="assets/js/upload.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
