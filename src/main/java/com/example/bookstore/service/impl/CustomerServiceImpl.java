@@ -6,6 +6,7 @@ import com.example.bookstore.service.UserService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CustomerServiceImpl implements UserService {
     protected Connection getConnection() {
@@ -54,6 +55,28 @@ public class CustomerServiceImpl implements UserService {
                 int roleId = rs.getInt("roleId");
                 boolean status = rs.getBoolean("status");
                 user = new User(id, username, password,name,phone,roleId,status);
+            }
+        } catch (SQLException e) {
+        }
+        return user;
+    }
+    public User findByUserNamePassword(String username,String password) {
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username like ? and password like ?");) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2,password);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usr = rs.getString("username");
+                String pw = rs.getString("password");
+                String name = rs.getString("name");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("roleId");
+                boolean status = rs.getBoolean("status");
+                user = new User(id, usr, pw,name,phone,roleId,status);
             }
         } catch (SQLException e) {
         }

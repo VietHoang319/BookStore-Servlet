@@ -16,74 +16,76 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
     RoleServiceImpl roleService = new RoleServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "create":
-                showCreateStaff(request,response);
+                showCreateStaff(request, response);
                 break;
             case "edit":
-                showEditStaff(request,response);
+                showEditStaff(request, response);
                 break;
             case "delete":
                 try {
-                    deleteStaff(request,response);
+                    deleteStaff(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 break;
             case "search":
-                showSearch(request,response);
+                showSearch(request, response);
                 break;
             default:
-                showListStaff(request,response);
+                showListStaff(request, response);
         }
     }
+
 
     private void showSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
         String name = request.getParameter("name");
         List<User> users = userService.findByName(name);
         List<Role> roles = roleService.findAllUser(users);
-        request.setAttribute("users",users);
-        request.setAttribute("roles",roles);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("users", users);
+        request.setAttribute("roles", roles);
+        requestDispatcher.forward(request, response);
     }
 
     private void showDeleteStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user/delete.jsp");
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.findById(id);
-        request.setAttribute("users",user);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("users", user);
+        requestDispatcher.forward(request, response);
     }
 
     private void showCreateStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user/list.jsp");
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
 
     private void showEditStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user/edit.jsp");
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.findById(id);
-        request.setAttribute("users",user);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("users", user);
+        requestDispatcher.forward(request, response);
     }
-    
+
     private void showListStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
         List<User> users = userService.findAll();
         List<Role> roles = roleService.findAllUser(users);
-        request.setAttribute("users",users);
-        request.setAttribute("roles",roles);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("users", users);
+        request.setAttribute("roles", roles);
+        requestDispatcher.forward(request, response);
     }
 
 
@@ -92,25 +94,24 @@ public class UserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "create":
                 try {
-                    createStaff(request,response);
+                    createStaff(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 break;
             case "edit":
                 try {
-                    editStaff(request,response);
+                    editStaff(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 break;
-
 
         }
     }
@@ -128,8 +129,7 @@ public class UserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
-//        if (userService.findByUserName(username).equals(username))
-        userService.add(new User(username,password,name,phone,roleId,status));
+        userService.add(new User(username, password, name, phone, roleId, status));
         response.sendRedirect("/users");
     }
 
@@ -141,7 +141,7 @@ public class UserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
-        userService.update(new User(id,username,password,name,phone,roleId,status));
+        userService.update(new User(id, username, password, name, phone, roleId, status));
         response.sendRedirect("/users");
     }
 }

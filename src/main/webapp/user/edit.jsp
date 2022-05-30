@@ -19,7 +19,7 @@
 <div id="wrapper">
     <div class="container">
         <div class="row justify-content-around">
-            <form method="post" class="col-md-6 bg-light p-3 my-3">
+            <form method="post" class="col-md-6 bg-light p-3 my-3" id="edit${users.id}">
                 <h1 class="text-center text-uppercase h3">Sửa thông tin nhân viên</h1>
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="id">
@@ -54,6 +54,12 @@
 </div></form>
 </body>
 <script>
-
+// function acceptEdit(id) {
+//     if (confirm("Bạn có xác nhận sửa hay không")){
+//         alert("Sửa thành công");
+//         document.getElementById("edit" +id).submit();
+//     }
+//     else alert("Sửa thất bại")
+// }
 </script>
 </html>

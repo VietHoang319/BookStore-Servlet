@@ -49,7 +49,13 @@
     </div>
 </div></form>
 </body>
-<script>
-
-</script>
+<%--<script>--%>
+<%--    function acceptEdit(id) {--%>
+<%--        if (confirm("Bạn có xác nhận sửa hay không")){--%>
+<%--            alert("Sửa thành công");--%>
+<%--            document.getElementById("edit" +id).submit();--%>
+<%--        }--%>
+<%--        else alert("Sửa thất bại")--%>
+<%--    }--%>
+<%--</script>--%>
 </html>

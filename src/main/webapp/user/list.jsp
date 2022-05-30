@@ -11,11 +11,11 @@
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
-<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">--%>
-<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--%>
-<%--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--%>
-<%--    <meta charset="utf-8"/>--%>
+    <%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">--%>
+    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
+    <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--%>
+    <%--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--%>
+    <%--    <meta charset="utf-8"/>--%>
     <style>
         .modal {
             display: none; /* Hidden by default */
@@ -109,15 +109,16 @@
         <div class="inner">
             <form method="get">
                 <a href="/users"><h1 style="display: inline">Quản lý nhân viên </h1></a>
-                <input type="submit" value="search" name="action" style="display: inline; float: right" >
-                <input type="text" name="name" placeholder="Nhập tên nhân viên mà bạn muốn tìm" style="display: inline; float: right; width: 30%">
+                <input type="submit" value="search" name="action" style="display: inline; float: right">
+                <input type="text" name="name" placeholder="Nhập tên nhân viên mà bạn muốn tìm"
+                       style="display: inline; float: right; width: 30%">
             </form>
-        <%-- Tạo--%>
+            <%-- Tạo--%>
             <div style="margin-bottom: 20px">
                 <button id="myBtn">Tạo Mới</button>
             </div>
             <!-- The Modal -->
-            <div id="myModal" class="modal" >
+            <div id="myModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <form method="post" class="col-md-12 bg-light p-3 my-3">
@@ -169,7 +170,15 @@
                         <td>${users.get(i).phone}</td>
                         <td>${roles.get(i).name}</td>
                         <td><a href="/users?action=edit&id=${users.get(i).id}" class="btn btn-secondary">Sửa</a></td>
-                        <td><a href="/users?action=delete&id=${users.get(i).id}" class="btn btn-danger">Xoá</a></td>
+                        <td>
+<%--                            <a href="/users?action=delete&id=${users.get(i).id}" class="btn btn-danger"--%>
+<%--                               onclick="acceptDelete(${users.get(i).id})">Xoá</a>--%>
+                            <form action="/users" method="get" id="delete${users.get(i).id}" style="display: inline">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="id" value="${users.get(i).id}">
+                                <a class="btn btn-danger" onclick="acceptDelete(${users.get(i).id})">Xoá</a>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
@@ -205,7 +214,6 @@
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-</body>
 <script>
     let modal = document.getElementById("myModal");
     let btn = document.getElementById("myBtn");
@@ -221,5 +229,14 @@
             modal.style.display = "none";
         }
     }
+
+    function acceptDelete(id) {
+        if (confirm("Bạn có xác nhận xoá không ")) {
+            alert("Xoá thành công");
+            document.getElementById("delete" + id).submit();
+        } else alert("Xoá thất bại")
+    }
 </script>
+</body>
+
 </html>

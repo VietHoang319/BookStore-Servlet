@@ -112,28 +112,28 @@ public class UserServiceImpl implements UserService {
         }
         return users;
     }
-//    public List<User> findByUserName(String username) {
-//        List<User> users = new ArrayList<>();
-//        try (Connection connection = getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where (roleId=2 or roleId=1) and username = ? and status = true; ");) {
-//            preparedStatement.setString(1, username);
-//            System.out.println(preparedStatement);
-//            ResultSet rs = preparedStatement.executeQuery();
-//            while (rs.next()) {
-//                int id = rs.getInt("id");
-//                String usernameFind = rs.getString("username");
-//                String password = rs.getString("password");
-//                String nameFind = rs.getString("name");
-//                String phone = rs.getString("phone");
-//                int roleId = rs.getInt("roleId");
-//                boolean status = rs.getBoolean("status");
-//                users.add(new User(id,usernameFind,password,nameFind,phone,roleId,status));
-//            }
-//        } catch (SQLException e) {
-//
-//        }
-//        return users;
-//    }
+    public User findByUserName(String name) {
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where name = ? and status = true; ");) {
+            preparedStatement.setString(1, name);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usernameFind = rs.getString("username");
+                String password = rs.getString("password");
+                String nameFind = rs.getString("name");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("roleId");
+                boolean status = rs.getBoolean("status");
+                user=(new User(id,usernameFind,password,nameFind,phone,roleId,status));
+            }
+        } catch (SQLException e) {
+
+        }
+        return user;
+    }
     @Override
     public boolean delete(int id) throws SQLException {
         boolean rowDeleted;
