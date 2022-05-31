@@ -55,7 +55,7 @@
                     <span class="dropdown-toggle">Đơn hàng</span>
                     <ul>
                         <li><a href="/carts">Giỏ hàng</a></li>
-                        <li><a href="/authors">Đơn hàng chờ xác nhận</a></li>
+                        <li><a href="/unconfirmed-orders">Đơn hàng chờ xác nhận</a></li>
                     </ul>
                 </li>
             </c:if>
@@ -97,24 +97,26 @@
                     <th>Tên sách</th>
                     <th>Giá</th>
                     <th>Số lượng</th>
+                    <th>Thành tiền</th>
                     <th></th>
                 </tr>
-                <c:forEach var="item" items="${tempOrder}">
+                <c:forEach var="i" begin="0" end="${tempOrder.size() - 1}">
                     <tr>
-                        <td>${item.book.name}</td>
-                        <td>${item.book.price}</td>
-                        <td>${item.quantity}</td>
-                        <td><a href="/carts?action=delete&id=${item.id}" class="btn btn-danger">Xoá</a></td>
+                        <td>${tempOrder.get(i).book.name}</td>
+                        <td>${tempOrder.get(i).book.price}</td>
+                        <td>${tempOrder.get(i).quantity}</td>
+                        <td>${intoMoney.get(i)}</td>
+                        <td><a href="/carts?action=delete&id=${tempOrder.get(i).id}" class="btn btn-danger">Xoá</a></td>
                     </tr>
                 </c:forEach>
             </table>
-
+            ${mess}
+            <span>Thành tiền : ${totalAmount}</span> <br>
             <a href="/carts?action=confirm" class="btn btn-primary">Đặt hàng</a>
         </div>
         <br>
         <br>
 </div>
-
 <!-- Footer -->
 <footer id="footer">
     <div class="inner">
@@ -142,7 +144,6 @@
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-
 <%--<body>--%>
 <%--<c:forEach var="i" begin="0" end="${tempOrder.size() - 1}">--%>
 <%--    <h3>${tempOrder.get(i).book.name}, ${tempOrder.get(i).book.price}, ${tempOrder.get(i).quantity}, ${intoMoney.get(i)}, <a href="/carts?action=delete&id=${tempOrder.get(i).id}">xóa</a></h3>--%>
@@ -150,4 +151,8 @@
 <%--<h3>${totalAmount}</h3>--%>
 <%--<a href="/carts?action=confirm">Đặt hàng</a>--%>
 <%--</body>--%>
+<%--<c:forEach var="order" items="${orders}">--%>
+<%--<h3>${order.id}, ${order.orderDate}, ${order.totalAmount}</h3>--%>
+<%--<a href="/unconfirmed-orders?action=delete&id=${order.id}">Hủy</a>--%>
+<%--</c:forEach>--%>
 </html>
