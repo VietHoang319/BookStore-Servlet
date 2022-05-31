@@ -54,9 +54,12 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+    private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        if (password ==null){
+
+        }
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
@@ -65,8 +68,9 @@ public class RegisterServlet extends HttpServlet {
             userService.add(new User(username, password, name, phone, roleId, status));
             response.sendRedirect("/logins");
         } else {
-            response.sendRedirect("/registers");
+            request.setAttribute("mess", "Tài khoản đã tồn tại");
+//            response.sendRedirect("/registers");
+            request.getRequestDispatcher("register/register.jsp").forward(request,response);
         }
-
     }
 }
