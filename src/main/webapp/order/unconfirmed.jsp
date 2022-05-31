@@ -73,7 +73,7 @@
                         <li>
                             <span class="dropdown-toggle">Quản lý đơn hàng</span>
                             <ul>
-                                <li><a href="/book-management">Quản lý đơn hàng</a></li>
+                                <li><a href="/order-management">Quản lý đơn hàng</a></li>
                                 <li><a href="/authors">Đơn hàng chưa xác nhận</a></li>
                             </ul>
                         </li>
@@ -144,11 +144,9 @@
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-<%--<h3>${order.id}</h3>--%>
-<%--<c:forEach var="item" items="${orderDetails}">--%>
-<%--<h3>${item.book.name}, ${item.numberOfOrder}, ${item.intoMoney}</h3>--%>
+<%--<c:forEach var="item" items="${orders}">--%>
+<%--<h3>${item.id}, ${item.customer.name}, ${item.staff.name}, ${item.orderDate}, ${item.totalAmount}, ${item.status}</h3>--%>
 <%--</c:forEach>--%>
-<%--<h3>${order.totalAmount}</h3>--%>
 <script>
     function acceptDelete(id) {
         if (confirm("Bạn có xác nhận xoá không ")) {
