@@ -63,7 +63,7 @@
             <li><a href="/books">Sách</a></li>
             <c:if test="${name!= null &&(roleId==1 ||roleId==2)}">
                 <li>
-                    <a href="" class="dropdown-toggle">Quản lý</a>
+                    <span class="dropdown-toggle">Quản lý</span>
                     <ul>
                         <li><a href="/book-management">Quản lý sách</a></li>
                         <li><a href="/authors">Quản lý tác giả</a></li>
