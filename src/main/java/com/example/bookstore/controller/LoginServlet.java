@@ -75,6 +75,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("phone",user.getPhone());
             session.setAttribute("name" , user.getName());
             session.setAttribute("roleId",user.getRoleId());
+            session.setAttribute("userId", user.getId());
             currentId = user.getId();
             response.sendRedirect("/");
         }
