@@ -1,13 +1,18 @@
 package com.example.bookstore.model;
 
 public class TempItem {
-    private static int id = 0;
-    private User user;
+    private int id = 0;
+    private Book book;
     private int quantity;
 
-    public TempItem(User user, int quantity) {
-        id = id + 1;
-        this.user = user;
+    public TempItem(int id, Book book, int quantity) {
+        this.id = id;
+        this.book = book;
+        this.quantity = quantity;
+    }
+
+    public TempItem(Book book, int quantity) {
+        this.book = book;
         this.quantity = quantity;
     }
 
@@ -16,15 +21,15 @@ public class TempItem {
     }
 
     public void setId(int id) {
-        TempItem.id = id;
+        this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Book getBook() {
+        return book;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public int getQuantity() {

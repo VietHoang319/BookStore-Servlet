@@ -87,7 +87,8 @@
 
                         <div class="row">
                             <div class="col-sm-11">
-                                <form method="">
+                                <form method="post" action="/carts">
+                                    <input type="hidden" name="id" value="${book.id}">
                                     <label class="control-label">Số lượng đặt hàng</label>
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -97,6 +98,7 @@
                                         </div>
 
                                         <div class="col-sm-6">
+                                            <input type="hidden" name="action" value="add">
                                             <input type="submit" class="primary" value="Thêm vào giỏ hàng">
                                         </div>
                                     </div>
