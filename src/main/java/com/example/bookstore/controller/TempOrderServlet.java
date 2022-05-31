@@ -19,6 +19,7 @@ import java.util.List;
 public class TempOrderServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
     TempOrder tempOrderManage = new TempOrder();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -42,6 +43,7 @@ public class TempOrderServlet extends HttpServlet {
 
     private void confirmOrder(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
         List<TempItem> tempOrder = (List<TempItem>) httpSession.getAttribute("tempOrder");
+
     }
 
     private void deleteItem(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException {

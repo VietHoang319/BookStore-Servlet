@@ -86,7 +86,21 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public boolean delete(int id) throws SQLException {
-        return false;
+        boolean rowDeleted;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("delete from author where id=?");) {
+            statement.setInt(1, id);
+            rowDeleted = statement.executeUpdate() > 0;
+        }
+        return rowDeleted;
+    }
+    public boolean delete(Author author) throws SQLException{
+        boolean rowDeleted;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update author set status=false where id=?;");) {
+            preparedStatement.setInt(1, author.getId());
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        }
+        return rowDeleted;
     }
 
     @Override

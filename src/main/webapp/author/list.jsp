@@ -11,13 +11,11 @@
 <html>
 <head>
     <title>PHPJabbers.com | Free Book Online Store Website Template</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <noscript>
-        <link rel="stylesheet" href="assets/css/noscript.css"/>
-    </noscript>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -78,7 +76,7 @@
         <div class="inner">
             <h1>Quản Lý Tác Giả</h1>
             <div style="margin-bottom: 20px">
-                <button id="myBtn">Tạo Mới</button>
+                <button id="myBtn"><a href="/authors?action=create">Tạo Mới</a></button>
             </div>
             <div id="myModal" class="modal">
                 <div class="modal-content">
@@ -109,7 +107,7 @@
         </div>
     </div>
 
-    <!--Author-->
+  <!--Author-->
     <script>
     </script>
     <table>
@@ -123,12 +121,31 @@
             <tr>
                 <td>${i.id}</td>
                 <td>${i.name}</td>
-                <td><a href="/authors?action=edit&id=${i.id}">Sửa</a></td>
-                <td>Xóa</td>
+                <td><a href="/authors?action=edit&id=${i.id} " class="btn btn-secondary">Sửa</a></td>
+                <td><a href="/authors?action=delete&id=${i.id}" class="btn btn-secondary">Xóa</a></td>
             </tr>
         </c:forEach>
     </table>
 </div>
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <ul class="icons">
+                <li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            </ul>
+
+            &nbsp;
+        </section>
+
+        <ul class="copyright">
+            <li>Copyright © 2020 Company Name </li>
+            <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+        </ul>
+    </div>
+</footer>
 
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
