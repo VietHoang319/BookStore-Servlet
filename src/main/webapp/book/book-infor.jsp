@@ -46,9 +46,20 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <li><a href="contact.html">Người dùng</a></li>
+            <c:if test="${name == null}">
+                <a href="logins">Đăng nhập</a>
+            </c:if>
             <li><a href="" class="active">Trang chủ</a></li>
-
+            <c:if test="${name != null}">
+                <li><a href="contact.html">${name}</a></li>
+                <li>
+                    <span class="dropdown-toggle">Đơn hàng</span>
+                    <ul>
+                        <li><a href="/carts">Giỏ hàng</a></li>
+                        <li><a href="/authors">Đơn hàng chờ xác nhận</a></li>
+                    </ul>
+                </li>
+            </c:if>
             <li><a href="/books">Sách</a></li>
 
             <li>
@@ -59,11 +70,20 @@
                     <li><a href="/authors">Quản lý tác giả</a></li>
                     <li><a href="/customers">Quản lý khách hàng</a></li>
                     <li><a href="/users">Quản lý nhân viên</a></li>
+                    <li>
+                        <span class="dropdown-toggle">Quản lý đơn hàng</span>
+                        <ul>
+                            <li><a href="/book-management">Quản lý đơn hàng</a></li>
+                            <li><a href="/authors">Đơn hàng chưa xác nhận</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
 
             <li><a href="contact.html">Liên hệ</a></li>
-            <li><a href="contact.html">Đăng xuất</a></li>
+            <c:if test="${name != null}">
+                <li><a href="contact.html">Đăng xuất</a></li>
+            </c:if>
         </ul>
     </nav>
 
