@@ -99,4 +99,23 @@ public class OrderServiceImpl implements OrderService {
         }
         return orders;
     }
+
+    @Override
+    public Order findById(String id) {
+        String query = "select id, orderDate, totalAmount from orderr where id = ?";
+        Order order = null;
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String idFind = resultSet.getString("id");
+                LocalDate orderDate = LocalDate.parse(resultSet.getString("orderDate"));
+                int totalAmount = resultSet.getInt("totalAmount");
+                order = new Order(idFind, orderDate, totalAmount);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return order;
+    }
 }

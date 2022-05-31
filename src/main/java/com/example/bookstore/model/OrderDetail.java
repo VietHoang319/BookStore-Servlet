@@ -16,6 +16,12 @@ public class OrderDetail {
         this.intoMoney = intoMoney;
     }
 
+    public OrderDetail(Book book, int numberOfOrder, int intoMoney) {
+        this.book = book;
+        this.numberOfOrder = numberOfOrder;
+        this.intoMoney = intoMoney;
+    }
+
     public Order getOrder() {
         return order;
     }

@@ -1,12 +1,11 @@
 package com.example.bookstore.service.impl;
 
+import com.example.bookstore.model.Book;
 import com.example.bookstore.model.OrderDetail;
 import com.example.bookstore.service.OrderDetailService;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailServiceImpl implements OrderDetailService {
@@ -62,5 +61,28 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public boolean update(OrderDetail orderDetail) throws SQLException {
         return false;
+    }
+
+    @Override
+    public List<OrderDetail> findByOrderId(String id) {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        String query = "select od.bookId, b.name, numberOfBook, intoMoney\n" +
+                "from orderdetail od\n" +
+                "join book b on b.id = od.bookId where od.orderId = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int bookId = resultSet.getInt("bookId");
+                String name = resultSet.getString("name");
+                int numberOfBook = resultSet.getInt("numberOfBook");
+                int intoMoney = resultSet.getInt("intoMoney");
+                Book book = new Book(bookId, name);
+                orderDetails.add(new OrderDetail(book, numberOfBook, intoMoney));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orderDetails;
     }
 }

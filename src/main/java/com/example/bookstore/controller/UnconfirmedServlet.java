@@ -1,7 +1,10 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.model.Order;
+import com.example.bookstore.model.OrderDetail;
+import com.example.bookstore.service.OrderDetailService;
 import com.example.bookstore.service.OrderService;
+import com.example.bookstore.service.impl.OrderDetailServiceImpl;
 import com.example.bookstore.service.impl.OrderServiceImpl;
 
 import javax.servlet.*;
@@ -14,6 +17,7 @@ import java.util.List;
 @WebServlet(name = "UnconfirmedServlet", value = "/unconfirmed-orders")
 public class UnconfirmedServlet extends HttpServlet {
     OrderServiceImpl orderService = new OrderServiceImpl();
+    OrderDetailService orderDetailService = new OrderDetailServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,9 +35,22 @@ public class UnconfirmedServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "search":
+                searchOrderDetail(request, response);
+                break;
             default:
                 showUnconfirmedOrder(request,response,httpSession);
         }
+    }
+
+    private void searchOrderDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("order-detail/order-detail.jsp");
+        String id = request.getParameter("id");
+        List<OrderDetail> orderDetails = orderDetailService.findByOrderId(id);
+        Order order = orderService.findById(id);
+        request.setAttribute("order", order);
+        request.setAttribute("orderDetails", orderDetails);
+        requestDispatcher.forward(request, response);
     }
 
     private void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

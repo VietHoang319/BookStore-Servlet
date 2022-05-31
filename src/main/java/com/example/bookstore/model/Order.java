@@ -21,6 +21,12 @@ public class Order {
         this.status = status;
     }
 
+    public Order(String id, LocalDate orderDate, int totalAmount) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+    }
+
     public Order(String id, User customer, LocalDate orderDate, int totalAmount) {
         this.id = id;
         this.customer = customer;

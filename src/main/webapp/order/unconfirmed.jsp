@@ -99,7 +99,7 @@
                 </tr>
                 <c:forEach var="order" items="${orders}">
                     <tr>
-                        <td>${order.id}</td>
+                        <td><a href="/unconfirmed-orders?action=search&id=${order.id}">${order.id}</a></td>
                         <td>${order.orderDate}</td>
                         <td>${order.totalAmount}</td>
                         <td><a href="/unconfirmed-orders?action=delete&id=${order.id}" class="btn btn-danger">Hủy</a></td>
@@ -128,7 +128,6 @@
             </ul>
         </div>
     </footer>
-
 </div>
 
 <!-- Scripts -->
