@@ -26,8 +26,8 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="index.html" class="logo">
-                <span class="fa fa-book"></span> <span class="title">Book Online Store Website</span>
+            <a href="/" class="logo">
+                <span class="fa fa-book"></span> <span class="title">Nhà sách bông bông</span>
             </a>
 
             <!-- Nav -->
@@ -78,9 +78,9 @@
                     </ul>
                 </li>
             </c:if>
-            <li><a href="contact.html">Liên hệ</a></li>
+            <li><a href="#footer">Liên hệ</a></li>
             <c:if test="${name != null}">
-                <li><a href="contact.html">Đăng xuất</a></li>
+                <li><a href="/logins?action=logout">Đăng xuất</a></li>
             </c:if>
         </ul>
     </nav>

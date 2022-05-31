@@ -47,7 +47,7 @@
         <h2>Menu</h2>
         <ul>
             <c:if test="${name == null}">
-                <li><a href="logins">Login</a></li>
+                <li><a href="logins">Đăng nhập</a></li>
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name!= null}">
@@ -79,10 +79,10 @@
                     </ul>
                 </li>
             </c:if>
+            <li><a href="#footer">Liên hệ</a></li>
             <c:if test="${name!=null}">
-                <li><a href="/">Đăng xuất</a></li>
+                <li><a href="/logins?action=logout">Đăng xuất</a></li>
             </c:if>
-            <li><a href="contact.html">Liên hệ</a></li>
         </ul>
     </nav>
 

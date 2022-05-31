@@ -40,6 +40,7 @@
                 </div>
                 <input type="hidden" name="roleId" value="3">
                 <input type="hidden" name="status" value="true">
+                <span style="color: red" class="text-center" >${mess}</span>
                 <input type="submit" value="Đăng ký" class="btn-primary btn-block btn">
             </form>
         </div>

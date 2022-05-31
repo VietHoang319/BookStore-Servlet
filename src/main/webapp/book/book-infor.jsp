@@ -80,9 +80,9 @@
                 </ul>
             </li>
 
-            <li><a href="contact.html">Liên hệ</a></li>
+            <li><a href="#footer">Liên hệ</a></li>
             <c:if test="${name != null}">
-                <li><a href="contact.html">Đăng xuất</a></li>
+                <li><a href="/logins?action=logout">Đăng xuất</a></li>
             </c:if>
         </ul>
     </nav>
