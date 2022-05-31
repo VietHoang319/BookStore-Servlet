@@ -17,30 +17,31 @@ import java.util.List;
 public class CustomerServlet extends HttpServlet {
     CustomerServiceImpl customerService = new CustomerServiceImpl();
     RoleServiceImpl roleService = new RoleServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "search":
-                showSearchCustomer(request,response);
+                showSearchCustomer(request, response);
                 break;
             case "edit":
-                showEditCustomer(request,response);
+                showEditCustomer(request, response);
                 break;
             case "delete":
                 try {
-                    deleteCustomer(request,response);
+                    deleteCustomer(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 break;
             default:
-                showCustomerList(request,response);
+                showCustomerList(request, response);
         }
     }
 
@@ -54,8 +55,8 @@ public class CustomerServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/customer/edit.jsp");
         int id = Integer.parseInt(request.getParameter("id"));
         User user = customerService.findById(id);
-        request.setAttribute("users",user);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("users", user);
+        requestDispatcher.forward(request, response);
     }
 
     private void showSearchCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,18 +64,22 @@ public class CustomerServlet extends HttpServlet {
         String name = request.getParameter("name");
         List<User> users = customerService.findByName(name);
         List<Role> roles = roleService.findAllUser(users);
-        request.setAttribute("users",users);
-        request.setAttribute("roles",roles);
-        requestDispatcher.forward(request,response);
+        if (users.size() > 0) {
+            request.setAttribute("users", users);
+            request.setAttribute("roles", roles);
+            requestDispatcher.forward(request, response);
+        } else {
+            response.sendRedirect("/customers");
+        }
     }
 
     private void showCustomerList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/list.jsp");
         List<User> users = customerService.findAll();
         List<Role> roles = roleService.findAllUser(users);
-        request.setAttribute("users",users);
-        request.setAttribute("roles",roles);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("users", users);
+        request.setAttribute("roles", roles);
+        requestDispatcher.forward(request, response);
     }
 
     @Override
@@ -82,13 +87,13 @@ public class CustomerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
-        if (action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "edit":
                 try {
-                    editCustomer(request,response);
+                    editCustomer(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -104,7 +109,7 @@ public class CustomerServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
-        customerService.update(new User(id,username,password,name,phone,roleId,status));
+        customerService.update(new User(id, username, password, name, phone, roleId, status));
         response.sendRedirect("/customers");
     }
 }

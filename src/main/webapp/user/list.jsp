@@ -88,7 +88,7 @@
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name != null}">
-                <li><a href="contact.html">${name}</a></li>
+                <li><a href="/logins?action=view">${name}</a></li>
                 <li>
                     <span class="dropdown-toggle">Đơn hàng</span>
                     <ul>

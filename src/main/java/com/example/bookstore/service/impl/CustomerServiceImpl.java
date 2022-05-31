@@ -123,6 +123,7 @@ public class CustomerServiceImpl implements UserService {
                 int roleId = rs.getInt("roleId");
                 boolean status = rs.getBoolean("status");
                 users.add(new User(id, username, password, nameFind, phone, roleId, status));
+
             }
         } catch (SQLException e) {
 

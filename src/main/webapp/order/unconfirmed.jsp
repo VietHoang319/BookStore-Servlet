@@ -51,7 +51,7 @@
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name != null}">
-                <li><a href="contact.html">${name}</a></li>
+                <li><a href="/logins?action=view">${name}</a></li>
                 <li>
                     <span class="dropdown-toggle">Đơn hàng</span>
                     <ul>
@@ -144,17 +144,11 @@
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-<%--<body>--%>
-<%--<c:forEach var="i" begin="0" end="${tempOrder.size() - 1}">--%>
-<%--    <h3>${tempOrder.get(i).book.name}, ${tempOrder.get(i).book.price}, ${tempOrder.get(i).quantity}, ${intoMoney.get(i)}, <a href="/carts?action=delete&id=${tempOrder.get(i).id}">xóa</a></h3>--%>
+<%--<h3>${order.id}</h3>--%>
+<%--<c:forEach var="item" items="${orderDetails}">--%>
+<%--<h3>${item.book.name}, ${item.numberOfOrder}, ${item.intoMoney}</h3>--%>
 <%--</c:forEach>--%>
-<%--<h3>${totalAmount}</h3>--%>
-<%--<a href="/carts?action=confirm">Đặt hàng</a>--%>
-<%--</body>--%>
-<%--<c:forEach var="order" items="${orders}">--%>
-<%--<h3>${order.id}, ${order.orderDate}, ${order.totalAmount}</h3>--%>
-<%--<a href="/unconfirmed-orders?action=delete&id=${order.id}">Hủy</a>--%>
-<%--</c:forEach>--%>
+<%--<h3>${order.totalAmount}</h3>--%>
 <script>
     function acceptDelete(id) {
         if (confirm("Bạn có xác nhận xoá không ")) {
