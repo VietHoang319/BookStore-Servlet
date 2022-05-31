@@ -18,13 +18,7 @@
 </head>
 <body>
 <header id="header">
-    <div class="inner">
 
-        <!-- Logo -->
-        <a href="index.html" class="logo">
-            <span class="fa fa-book"></span> <span class="title">Book Online Store Website</span>
-        </a>
-    </div>
 </header>
 <form method="post">
 <%--    <h1>${authorDelete.status}</h1>--%>

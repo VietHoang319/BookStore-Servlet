@@ -47,7 +47,7 @@
             </form>
         </div>
     </div>
-</div></form>
+</div>
 </body>
 <%--<script>--%>
 <%--    function acceptEdit(id) {--%>

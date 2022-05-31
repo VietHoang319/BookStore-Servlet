@@ -45,7 +45,7 @@ public class AuthorServiceImpl implements AuthorService {
     public Author findById(int id) throws SQLException {
         Author author = null ;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from author where id = ?;");){
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from author where id = ?");){
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
