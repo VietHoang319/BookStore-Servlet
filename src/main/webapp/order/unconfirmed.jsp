@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
-  User: sonvu
-  Date: 27/05/2022
-  Time: 9:17 SA
+  User: Viet Hoang Ngo
+  Date: 5/30/2022
+  Time: 11:10 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -18,45 +18,6 @@
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
-    <style>
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* The Close Button */
-        .close {
-            color: #aaaaaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -68,7 +29,7 @@
 
             <!-- Logo -->
             <a href="/" class="logo">
-                <span class="fa fa-book"></span> <span class="title">Nhà Sách Bông Bông</span>
+                <span class="fa fa-book"></span> <span class="title">Nhà sách bông bông</span>
             </a>
 
             <!-- Nav -->
@@ -85,8 +46,8 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
-            <c:if test="${name ==null}">
-                <a href="logins">Đăng nhập</a>
+            <c:if test="${name == null}">
+                <li><a href="logins">Đăng nhập</a></li>
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name != null}">
@@ -100,9 +61,10 @@
                 </li>
             </c:if>
             <li><a href="/books">Sách</a></li>
-            <c:if test="${name != null&&(roleId==1 || roleId==2)}">
+            <c:if test="${name != null && (roleId==1 ||roleId==2)}">
                 <li>
                     <a href="" class="dropdown-toggle">Quản lý</a>
+
                     <ul>
                         <li><a href="/book-management">Quản lý sách</a></li>
                         <li><a href="/authors">Quản lý tác giả</a></li>
@@ -128,50 +90,33 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <a href="/authors"><h1 style="display: inline">Quản lý Tác Giả</h1></a>
-            <form method="get">
-                <button id="myBtn"><a href="/authors?action=create">Tạo Mới</a></button>
-
-            </form>
             <table>
                 <tr>
-                    <th> Id</th>
-                    <th> Tên</th>
-                    <th> Sửa</th>
-                    <th> Xóa</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày</th>
+                    <th>Thành tiền</th>
+                    <th></th>
                 </tr>
-
-                <c:forEach var="i" items="${authorList}">
-                    <c:if test="${i.status}">
-                        <tr>
-                            <td>${i.id}</td>
-                            <td>${i.name}</td>
-                            <td><a href="/authors?action=edit&id=${i.id} " class="btn btn-secondary">Sửa</a></td>
-                            <td>
-                                <form action="/authors" method="get" id="delete${i.id}" style="display: inline">
-                                    <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="id" value="${i.id}">
-                                    <a class="btn btn-danger" onclick="acceptDelete(${i.id})" style="color: white">Xoá</a>
-
-                                </form>
-                            </td>
-
-                        </tr>
-                    </c:if>
+                <c:forEach var="order" items="${orders}">
+                    <tr>
+                        <td>${order.id}</td>
+                        <td>${order.orderDate}</td>
+                        <td>${order.totalAmount}</td>
+                        <td><a href="/unconfirmed-orders?action=delete&id=${order.id}" class="btn btn-danger">Hủy</a></td>
+                    </tr>
                 </c:forEach>
             </table>
         </div>
+        <br>
+        <br>
     </div>
-
     <!-- Footer -->
     <footer id="footer">
         <div class="inner">
             <section>
                 <ul class="icons">
-                    <li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
                     <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
                     <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
                 </ul>
 
                 &nbsp;
@@ -192,28 +137,15 @@
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-</body>
-<script>
-    let modal = document.getElementById("myModal");
-    let btn = document.getElementById("myBtn");
-    let span = document.getElementsByClassName("close")[0];
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    function acceptDelete(id) {
-        if (confirm("Bạn có xác nhận xoá không ")) {
-            alert("Xoá thành công");
-            document.getElementById("delete" + id).submit();
-        } else alert("Xoá thất bại")
-    }
-</script>
+<%--<body>--%>
+<%--<c:forEach var="i" begin="0" end="${tempOrder.size() - 1}">--%>
+<%--    <h3>${tempOrder.get(i).book.name}, ${tempOrder.get(i).book.price}, ${tempOrder.get(i).quantity}, ${intoMoney.get(i)}, <a href="/carts?action=delete&id=${tempOrder.get(i).id}">xóa</a></h3>--%>
+<%--</c:forEach>--%>
+<%--<h3>${totalAmount}</h3>--%>
+<%--<a href="/carts?action=confirm">Đặt hàng</a>--%>
+<%--</body>--%>
+<%--<c:forEach var="order" items="${orders}">--%>
+<%--<h3>${order.id}, ${order.orderDate}, ${order.totalAmount}</h3>--%>
+<%--<a href="/unconfirmed-orders?action=delete&id=${order.id}">Hủy</a>--%>
+<%--</c:forEach>--%>
 </html>

@@ -112,12 +112,11 @@ public class UserServiceImpl implements UserService {
         }
         return users;
     }
-    public User findByUserName(String name) {
-        User user = null;
+    public List<User> findByUserName(String name) {
+        List<User> user = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where name = ? and status = true; ");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select id,username,password,name ,phone,roleId,status from user where username = ?; ");) {
             preparedStatement.setString(1, name);
-            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -127,12 +126,13 @@ public class UserServiceImpl implements UserService {
                 String phone = rs.getString("phone");
                 int roleId = rs.getInt("roleId");
                 boolean status = rs.getBoolean("status");
-                user=(new User(id,usernameFind,password,nameFind,phone,roleId,status));
+                user.add(new User(id,usernameFind,password,nameFind,phone,roleId,status));
+                return user;
             }
         } catch (SQLException e) {
 
         }
-        return user;
+        return null;
     }
     @Override
     public boolean delete(int id) throws SQLException {

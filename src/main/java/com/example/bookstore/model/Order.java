@@ -3,7 +3,7 @@ package com.example.bookstore.model;
 import java.time.LocalDate;
 
 public class Order {
-     private int id;
+     private String id;
      private User customer;
      private User staff;
      private LocalDate orderDate;
@@ -13,7 +13,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, User customer, LocalDate orderDate, int totalAmount, int status) {
+    public Order(String id, User customer, LocalDate orderDate, int totalAmount, int status) {
         this.id = id;
         this.customer = customer;
         this.orderDate = orderDate;
@@ -21,7 +21,14 @@ public class Order {
         this.status = status;
     }
 
-    public Order(int id, User customer, User staff, LocalDate orderDate, int totalAmount, int status) {
+    public Order(String id, User customer, LocalDate orderDate, int totalAmount) {
+        this.id = id;
+        this.customer = customer;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+    }
+
+    public Order(String id, User customer, User staff, LocalDate orderDate, int totalAmount, int status) {
         this.id = id;
         this.customer = customer;
         this.staff = staff;
@@ -30,11 +37,11 @@ public class Order {
         this.status = status;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

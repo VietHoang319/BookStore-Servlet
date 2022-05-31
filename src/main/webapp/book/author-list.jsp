@@ -47,28 +47,42 @@
         <h2>Menu</h2>
         <ul>
             <c:if test="${name == null}">
-                <li><a href="logins">Login</a></li>
+                <li><a href="logins">Đăng nhập</a></li>
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name!= null}">
                 <li><a href="contact.html">${name}</a></li>
+                <li>
+                    <span class="dropdown-toggle">Đơn hàng</span>
+                    <ul>
+                        <li><a href="/carts">Giỏ hàng</a></li>
+                        <li><a href="/unconfirmed-orders">Đơn hàng chờ xác nhận</a></li>
+                    </ul>
+                </li>
             </c:if>
             <li><a href="/books">Sách</a></li>
             <c:if test="${name!= null &&(roleId==1 ||roleId==2)}">
                 <li>
-                    <a href="" class="dropdown-toggle">Quản lý</a>
+                    <span  class="dropdown-toggle">Quản lý</span>
                     <ul>
                         <li><a href="/book-management">Quản lý sách</a></li>
                         <li><a href="/authors">Quản lý tác giả</a></li>
                         <li><a href="/customers">Quản lý khách hàng</a></li>
                         <li><a href="/users">Quản lý nhân viên</a></li>
+                        <li>
+                            <span class="dropdown-toggle">Quản lý đơn hàng</span>
+                            <ul>
+                                <li><a href="/book-management">Quản lý đơn hàng</a></li>
+                                <li><a href="/authors">Đơn hàng chưa xác nhận</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </c:if>
+            <li><a href="#footer">Liên hệ</a></li>
             <c:if test="${name!=null}">
-                <li><a href="/">Đăng xuất</a></li>
+                <li><a href="/logins?action=logout">Đăng xuất</a></li>
             </c:if>
-            <li><a href="contact.html">Liên hệ</a></li>
         </ul>
     </nav>
 

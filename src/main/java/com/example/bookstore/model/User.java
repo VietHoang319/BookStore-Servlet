@@ -21,6 +21,11 @@ public class User {
         this.status = status;
     }
 
+    public User(int id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
     public User(int id, String username, String userpass, String name, String phone, int roleId, boolean status) {
         this.id = id;
         this.username = username;

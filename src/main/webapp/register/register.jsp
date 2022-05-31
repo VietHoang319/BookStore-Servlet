@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -35,10 +36,11 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Số điện thoại</label>
-                    <input type="text" name="phone" id="phone" class="form-control">
+                    <input type="text" name="phone" id="phone" class="form-control" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Nhập không đúng định dạng">
                 </div>
                 <input type="hidden" name="roleId" value="3">
                 <input type="hidden" name="status" value="true">
+                <span style="color: red" class="text-center" >${mess}</span>
                 <input type="submit" value="Đăng ký" class="btn-primary btn-block btn">
             </form>
         </div>

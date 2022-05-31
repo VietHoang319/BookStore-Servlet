@@ -21,7 +21,7 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="" class="logo">
+            <a href="/" class="logo">
                 <span class="fa fa-book"></span> <span class="title">Nhà sách Bông Bông</span>
             </a>
 
@@ -40,7 +40,7 @@
         <h2>Menu</h2>
         <ul>
             <c:if test="${name == null}">
-                <li><a href="logins">Login</a></li>
+                <li><a href="logins">Đăng nhập</a></li>
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name!=null}">
@@ -49,7 +49,7 @@
                     <span class="dropdown-toggle">Đơn hàng</span>
                     <ul>
                         <li><a href="/carts">Giỏ hàng</a></li>
-                        <li><a href="/authors">Đơn hàng chờ xác nhận</a></li>
+                        <li><a href="/unconfirmed-orders">Đơn hàng chờ xác nhận</a></li>
                     </ul>
                 </li>
             </c:if>
@@ -72,10 +72,10 @@
                     </ul>
                 </li>
             </c:if>
+            <li><a href="#footer">Liên hệ</a></li>
             <c:if test="${name != null}">
                 <li><a href="/logins?action=logout">Đăng xuất</a></li>
             </c:if>
-            <li><a href="contact.html">Liên hệ</a></li>
         </ul>
     </nav>
 
