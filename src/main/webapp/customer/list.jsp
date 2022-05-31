@@ -104,7 +104,7 @@
                         <li>
                             <span class="dropdown-toggle">Quản lý đơn hàng</span>
                             <ul>
-                                <li><a href="/book-management">Quản lý đơn hàng</a></li>
+                                <li><a href="/order-management">Quản lý đơn hàng</a></li>
                                 <li><a href="/authors">Đơn hàng chưa xác nhận</a></li>
                             </ul>
                         </li>

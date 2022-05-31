@@ -109,7 +109,7 @@
                         <li>
                             <span class="dropdown-toggle">Quản lý đơn hàng</span>
                             <ul>
-                                <li><a href="/book-management">Quản lý đơn hàng</a></li>
+                                <li><a href="/order-management">Quản lý đơn hàng</a></li>
                                 <li><a href="/authors">Đơn hàng chưa xác nhận</a></li>
                             </ul>
                         </li>
@@ -192,7 +192,7 @@
                         <td>
 <%--                            <a href="/users?action=delete&id=${users.get(i).id}" class="btn btn-danger"--%>
 <%--                               onclick="acceptDelete(${users.get(i).id})">Xoá</a>--%>
-                            <form action="/users" method="get" id="delete${users.get(i).id}" style="display: inline">
+                            <form action="/users"  id="delete${users.get(i).id}" style="display: inline">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="id" value="${users.get(i).id}">
                                 <a class="btn btn-danger" onclick="acceptDelete(${users.get(i).id})" style="color: white">Xoá</a>

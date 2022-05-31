@@ -104,7 +104,7 @@
                         <td>${order.totalAmount}</td>
                         <td>
                             <a href="/unconfirmed-orders?action=delete&id=${order.id}" class="btn btn-danger">Hủy</a>
-<%--                            <form action="/unconfirmed-orders" method="get" id="delete${order.id}" style="display: inline">--%>
+<%--                            <form action="/unconfirmed-orders"  id="delete${order.id}" style="display: inline">--%>
 <%--                                <input type="hidden" name="action" value="delete">--%>
 <%--                                <input type="hidden" name="id" value="${order.id}">--%>
 <%--                                <a class="btn btn-danger" onclick="acceptDelete(${order.id})"--%>

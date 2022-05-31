@@ -91,7 +91,7 @@
     <div id="main">
         <div class="inner">
             <form method="get">
-                <a href="/unconfirmed-orders"><h1 style="display: inline">${order.id}</h1></a>
+                <h1 style="display: inline">${order.id}</h1>
             </form>
             <table>
                 <tr>

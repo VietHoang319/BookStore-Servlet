@@ -106,7 +106,14 @@
                         <td>${tempOrder.get(i).book.price}</td>
                         <td>${tempOrder.get(i).quantity}</td>
                         <td>${intoMoney.get(i)}</td>
-                        <td><a href="/carts?action=delete&id=${tempOrder.get(i).id}" class="btn btn-danger">Xoá</a></td>
+                        <td>
+                            <a href="/carts?action=delete&id=${tempOrder.get(i).id}" class="btn btn-danger">Xoá</a>
+<%--                            <form action="/carts" method="get" id="delete${tempOrder.get(i).id}" style="display: inline">--%>
+<%--                                <input type="hidden" name="action" value="delete">--%>
+<%--                                <input type="hidden" name="id" value="${tempOrder.get(i).id}">--%>
+<%--                                <a class="btn btn-danger" onclick="acceptDelete(${tempOrder.get(i).id})" style="color: white">Xoá</a>--%>
+<%--                            </form>--%>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
@@ -116,25 +123,25 @@
         </div>
         <br>
         <br>
-</div>
-<!-- Footer -->
-<footer id="footer">
-    <div class="inner">
-        <section>
-            <ul class="icons">
-                <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-            </ul>
-
-            &nbsp;
-        </section>
-
-        <ul class="copyright">
-            <li>Copyright © 2020 Company Name</li>
-            <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
-        </ul>
     </div>
-</footer>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <section>
+                <ul class="icons">
+                    <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                </ul>
+
+                &nbsp;
+            </section>
+
+            <ul class="copyright">
+                <li>Copyright © 2020 Company Name</li>
+                <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+            </ul>
+        </div>
+    </footer>
 
 </div>
 

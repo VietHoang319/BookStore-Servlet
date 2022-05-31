@@ -152,7 +152,6 @@
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="id" value="${i.id}">
                                     <a class="btn btn-danger" onclick="acceptDelete(${i.id})" style="color: white">Xoá</a>
-
                                 </form>
                             </td>
 
