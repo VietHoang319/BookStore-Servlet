@@ -98,6 +98,33 @@ public class OrderServiceImpl implements OrderService {
         return false;
     }
 
+    public boolean confirm(String id, int staffId) {
+        boolean rowUpdate;
+        String updateOrder = "update orderr set staffId = ?, status = 2 where id = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(updateOrder)){
+            preparedStatement.setString(1, String.valueOf(staffId));
+            preparedStatement.setString(2, id);
+            rowUpdate = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowUpdate;
+    }
+
+    @Override
+    public boolean delete(String id, int staffId) {
+        boolean rowUpdate;
+        String updateOrder = "update orderr set staffId = ?, status = 0 where id = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(updateOrder)){
+            preparedStatement.setString(1, String.valueOf(staffId));
+            preparedStatement.setString(2, id);
+            rowUpdate = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowUpdate;
+    }
+
     @Override
     public List<Order> findByUserId(int userId) {
         List<Order> orders = new ArrayList<>();

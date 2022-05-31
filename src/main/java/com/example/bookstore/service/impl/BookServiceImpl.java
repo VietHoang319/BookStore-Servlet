@@ -3,6 +3,7 @@ package com.example.bookstore.service.impl;
 import com.example.bookstore.model.Author;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Category;
+import com.example.bookstore.model.OrderDetail;
 import com.example.bookstore.service.BookService;
 
 import java.sql.*;
@@ -200,4 +201,17 @@ public class BookServiceImpl implements BookService {
         return rowEdit;
     }
 
+    public void editQuantity(List<OrderDetail> orderDetails) {
+        for (OrderDetail orderDetail : orderDetails) {
+            String editQuantity = "update book set numberOfBook = ? where id = ?";
+            try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(editQuantity)) {
+                int number = orderDetail.getBook().getNumberOfBook() - orderDetail.getNumberOfOrder();
+                preparedStatement.setString(1, String.valueOf(number));
+                preparedStatement.setString(2, String.valueOf(orderDetail.getBook().getId()));
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

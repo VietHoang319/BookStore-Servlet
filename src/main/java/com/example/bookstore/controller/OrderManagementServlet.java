@@ -4,6 +4,7 @@ import com.example.bookstore.model.Order;
 import com.example.bookstore.model.OrderDetail;
 import com.example.bookstore.service.OrderDetailService;
 import com.example.bookstore.service.OrderService;
+import com.example.bookstore.service.impl.BookServiceImpl;
 import com.example.bookstore.service.impl.OrderDetailServiceImpl;
 import com.example.bookstore.service.impl.OrderServiceImpl;
 
@@ -15,8 +16,9 @@ import java.util.List;
 
 @WebServlet(name = "OrderManagementServlet", value = "/order-management")
 public class OrderManagementServlet extends HttpServlet {
-    OrderService orderService = new OrderServiceImpl();
+    OrderServiceImpl orderService = new OrderServiceImpl();
     OrderDetailService orderDetailService = new OrderDetailServiceImpl();
+    BookServiceImpl bookService = new BookServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,10 +33,10 @@ public class OrderManagementServlet extends HttpServlet {
                 showUnconfirm(request, response);
                 break;
             case "confirm":
-                confirmOrder(request, response);
+                confirmOrder(request, response, httpSession);
                 break;
             case "delete":
-                deleteOrder(request, response);
+                deleteOrder(request, response, httpSession);
                 break;
             case "search":
                 searchOrderDetail(request, response);
@@ -44,11 +46,19 @@ public class OrderManagementServlet extends HttpServlet {
         }
     }
 
-    private void deleteOrder(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteOrder(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException {
+        String id = request.getParameter("id");
+        int StaffId = (int) httpSession.getAttribute("userId");
+        orderService.delete(id, StaffId);
+        response.sendRedirect("/order-management?action=unconfirm");
     }
 
-    private void confirmOrder(HttpServletRequest request, HttpServletResponse response) {
-        
+    private void confirmOrder(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws IOException {
+        String id = request.getParameter("id");
+        int StaffId = (int) httpSession.getAttribute("userId");
+        orderService.confirm(id, StaffId);
+        bookService.editQuantity(orderDetailService.findByOrderId(id));
+        response.sendRedirect("/order-management?action=unconfirm");
     }
 
     private void showUnconfirm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
