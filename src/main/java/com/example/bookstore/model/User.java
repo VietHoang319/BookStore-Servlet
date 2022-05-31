@@ -21,9 +21,9 @@ public class User {
         this.status = status;
     }
 
-    public User(int id, String username) {
+    public User(int id, String name) {
         this.id = id;
-        this.username = username;
+        this.name = name;
     }
 
     public User(int id, String username, String userpass, String name, String phone, int roleId, boolean status) {

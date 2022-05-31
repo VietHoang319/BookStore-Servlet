@@ -37,9 +37,20 @@ public class BookManagementServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "search":
+                searchBook(request, response);
+                break;
             default:
                 showList(request, response);
         }
+    }
+
+    private void searchBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("book/list.jsp");
+        String name = request.getParameter("name");
+        List<Book> books = bookService.findByName(name);
+        request.setAttribute("books", books);
+        requestDispatcher.forward(request, response);
     }
 
     private void showList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

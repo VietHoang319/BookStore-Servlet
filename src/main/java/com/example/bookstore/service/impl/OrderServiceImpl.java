@@ -46,7 +46,31 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
-        return null;
+        List<Order> orders = new ArrayList<>();
+        String query = "select o.id, o.customerId, u.name, o.staffId, u2.name, orderDate, totalAmount, o.status\n" +
+                "from orderr o\n" +
+                "join user u on o.customerId = u.id\n" +
+                "join user u2 on o.staffId = u2.id;";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                int customerId = resultSet.getInt("customerId");
+                String nameCustomer = resultSet.getString("u.name");
+                int staffId = resultSet.getInt("staffId");
+                String nameStaff = resultSet.getString("u2.name");
+                LocalDate localDate = LocalDate.parse(resultSet.getString("orderDate"));
+                int totalAmount = resultSet.getInt("totalAmount");
+                User customer = new User(customerId, nameCustomer);
+                User staff = new User(staffId, nameStaff);
+                int status = resultSet.getInt("status");
+                Order order = new Order(id, customer, staff, localDate, totalAmount, status);
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orders;
     }
 
     @Override
