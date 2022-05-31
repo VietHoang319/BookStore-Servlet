@@ -74,7 +74,7 @@
                             <span class="dropdown-toggle">Quản lý đơn hàng</span>
                             <ul>
                                 <li><a href="/order-management">Quản lý đơn hàng</a></li>
-                                <li><a href="/authors">Đơn hàng chưa xác nhận</a></li>
+                                <li><a href="/order-management?action=unconfirm">Đơn hàng chưa xác nhận</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -104,11 +104,10 @@
                         <td>${order.totalAmount}</td>
                         <td>
                             <a href="/unconfirmed-orders?action=delete&id=${order.id}" class="btn btn-danger">Hủy</a>
-<%--                            <form action="/unconfirmed-orders"  id="delete${order.id}" style="display: inline">--%>
-<%--                                <input type="hidden" name="action" value="delete">--%>
+<%--                            <form action="unconfirmed-orders" id="delete${order.id}">--%>
+<%--                                <input type="hidden" value="delete" name="action">--%>
 <%--                                <input type="hidden" name="id" value="${order.id}">--%>
-<%--                                <a class="btn btn-danger" onclick="acceptDelete(${order.id})"--%>
-<%--                                   style="color: white">Xoá</a>--%>
+<%--                                <a class="btn btn-danger" onclick="acceptDelete(${order.id})" style="color: white">Xoá</a>--%>
 <%--                            </form>--%>
                         </td>
                     </tr>
@@ -147,12 +146,17 @@
 <%--<c:forEach var="item" items="${orders}">--%>
 <%--<h3>${item.id}, ${item.customer.name}, ${item.staff.name}, ${item.orderDate}, ${item.totalAmount}, ${item.status}</h3>--%>
 <%--</c:forEach>--%>
-<script>
-    function acceptDelete(id) {
-        if (confirm("Bạn có xác nhận xoá không ")) {
-            alert("Xoá thành công");
-            document.getElementById("delete" + id).submit();
-        } else alert("Xoá thất bại")
-    }
-</script>
+<%--<h3>mã đơn hàng, tên khách hàng, ngày đặt hàng, tổng tiền</h3>--%>
+<%--<c:forEach var="item" items="${orders}">--%>
+<%--<h3><a href="/order-management?action=search&id=${item.id}">${item.id}</a>, ${item.customer.name}, ${item.orderDate}, ${item.totalAmount}, <a href="/order-management?action=confirm&id=${item.id}">Xác nhận</a>, <a href="/order-management?action=delete&id=${item.id}">Hủy</a>--%>
+<%--</h3>--%>
+<%--</c:forEach>--%>
+<%--<script>--%>
+<%--    function acceptDelete(id) {--%>
+<%--        if (confirm("Bạn có xác nhận xoá không ")) {--%>
+<%--            alert("Xoá thành công");--%>
+<%--            document.getElementById("delete" + id).submit();--%>
+<%--        } else alert("Xoá thất bại")--%>
+<%--    }--%>
+<%--</script>--%>
 </html>
