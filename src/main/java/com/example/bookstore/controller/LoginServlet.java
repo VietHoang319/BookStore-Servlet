@@ -1,5 +1,6 @@
 package com.example.bookstore.controller;
 
+import com.example.bookstore.model.Book;
 import com.example.bookstore.model.User;
 import com.example.bookstore.service.impl.CustomerServiceImpl;
 
@@ -7,12 +8,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/logins")
 public class LoginServlet extends HttpServlet {
     CustomerServiceImpl customerService = new CustomerServiceImpl();
     static int currentId =0;
+    static String name ="";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,12 +27,22 @@ public class LoginServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "view":
+                showViewUser(request,response);
+                break;
             case "logout":
                 logout(request,response,session);
                 break;
             default:
                 showLoginForm(request, response);
         }
+    }
+
+    private void showViewUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = customerService.findById(currentId);
+        request.setAttribute("users", user);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login/view.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,8 +67,26 @@ public class LoginServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-
+            case "view":
+                try {
+                    editUser(request,response,session);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
+    }
+
+    private void editUser(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException, SQLException {
+        String name = request.getParameter("name");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String phone = request.getParameter("phone");
+        int roleId = Integer.parseInt(request.getParameter("roleId"));
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        customerService.update(new User(currentId,username,password,name,phone,roleId,status));
+        session.setAttribute("name", name);
+        response.sendRedirect("/");
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
@@ -77,6 +108,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("roleId",user.getRoleId());
             session.setAttribute("userId", user.getId());
             currentId = user.getId();
+            name = user.getName();
             response.sendRedirect("/");
         }
     }

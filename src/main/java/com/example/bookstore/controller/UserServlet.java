@@ -1,5 +1,6 @@
 package com.example.bookstore.controller;
 
+import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Role;
 import com.example.bookstore.model.User;
 import com.example.bookstore.service.impl.RoleServiceImpl;
@@ -46,7 +47,6 @@ public class UserServlet extends HttpServlet {
                 showListStaff(request, response);
         }
     }
-
 
     private void showSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
