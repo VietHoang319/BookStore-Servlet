@@ -49,7 +49,7 @@
                     <span class="dropdown-toggle">Đơn hàng</span>
                     <ul>
                         <li><a href="/carts">Giỏ hàng</a></li>
-                        <li><a href="/authors">Đơn hàng chờ xác nhận</a></li>
+                        <li><a href="/unconfirmed-orders">Đơn hàng chờ xác nhận</a></li>
                     </ul>
                 </li>
             </c:if>

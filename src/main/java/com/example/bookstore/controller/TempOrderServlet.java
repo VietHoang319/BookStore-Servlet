@@ -66,6 +66,7 @@ public class TempOrderServlet extends HttpServlet {
         }
         order.setTotalAmount(totalAmount);
         orderService.add(order);
+        tempOrder.clear();
         response.sendRedirect("/");
     }
 
@@ -92,6 +93,15 @@ public class TempOrderServlet extends HttpServlet {
             tempOrder = new ArrayList<>();
             httpSession.setAttribute("tempOrder", tempOrder);
         }
+        List<Integer> intoMoneyList = new ArrayList<>();
+        int totalAmount = 0;
+        for (TempItem item : tempOrder) {
+            int intoMoney = item.getBook().getPrice() * item.getQuantity();
+            intoMoneyList.add(intoMoney);
+            totalAmount += intoMoney;
+        }
+        request.setAttribute("intoMoney", intoMoneyList);
+        request.setAttribute("totalAmount", totalAmount);
         requestDispatcher.forward(request, response);
     }
 

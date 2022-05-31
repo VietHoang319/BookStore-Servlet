@@ -12,9 +12,10 @@
     <title>Title</title>
 </head>
 <body>
-<c:forEach var="item" items="${tempOrder}">
-    <h3>${item.id}, ${item.book.name}, ${item.quantity}, <a href="/carts?action=delete&id=${item.id}">xóa</a></h3>
+<c:forEach var="i" begin="0" end="${tempOrder.size() - 1}">
+    <h3>${tempOrder.get(i).book.name}, ${tempOrder.get(i).book.price}, ${tempOrder.get(i).quantity}, ${intoMoney.get(i)}, <a href="/carts?action=delete&id=${tempOrder.get(i).id}">xóa</a></h3>
 </c:forEach>
+<h3>${totalAmount}</h3>
 <a href="/carts?action=confirm">Đặt hàng</a>
 </body>
 </html>
