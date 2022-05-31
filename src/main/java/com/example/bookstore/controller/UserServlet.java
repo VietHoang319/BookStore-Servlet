@@ -53,9 +53,13 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         List<User> users = userService.findByName(name);
         List<Role> roles = roleService.findAllUser(users);
-        request.setAttribute("users", users);
-        request.setAttribute("roles", roles);
-        requestDispatcher.forward(request, response);
+        if (users.size() >0) {
+            request.setAttribute("users", users);
+            request.setAttribute("roles", roles);
+            requestDispatcher.forward(request, response);
+        }else {
+            response.sendRedirect("/users");
+        }
     }
 
     private void showDeleteStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

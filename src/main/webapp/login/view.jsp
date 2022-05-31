@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -9,10 +10,6 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
@@ -26,12 +23,10 @@
     <!-- Header -->
     <header id="header">
         <div class="inner">
-
             <!-- Logo -->
             <a href="/" class="logo">
                 <span class="fa fa-book"></span> <span class="title">Nhà sách bông bông</span>
             </a>
-
             <!-- Nav -->
             <nav>
                 <ul>
@@ -41,7 +36,6 @@
 
         </div>
     </header>
-
     <!-- Menu -->
     <nav id="menu">
         <h2>Menu</h2>
@@ -51,7 +45,7 @@
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name != null}">
-                <li><a href="contact.html">${name}</a></li>
+                <li><a href="/logins?action=view">${name}</a></li>
                 <li>
                     <span class="dropdown-toggle">Đơn hàng</span>
                     <ul>
@@ -64,7 +58,6 @@
             <c:if test="${name != null && (roleId==1 ||roleId==2)}">
                 <li>
                     <a href="" class="dropdown-toggle">Quản lý</a>
-
                     <ul>
                         <li><a href="/book-management">Quản lý sách</a></li>
                         <li><a href="/authors">Quản lý tác giả</a></li>
@@ -122,13 +115,4 @@
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-<script>
-    // function acceptEdit(id) {
-    //     if (confirm("Bạn có xác nhận sửa hay không")){
-    //         alert("Sửa thành công");
-    //         document.getElementById("edit" +id).submit();
-    //     }
-    //     else alert("Sửa thất bại")
-    // }
-</script>
 </html>
