@@ -1,16 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Viet Hoang Ngo
-  Date: 5/30/2022
-  Time: 11:10 PM
+  User: Admin
+  Date: 27/5/2022
+  Time: 11:28 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE HTML>
 <html>
 <head>
-    <title>PHPJabbers.com | Free Book Online Store Website Template</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
@@ -19,10 +21,8 @@
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
 </head>
-<body class="is-preload">
-<!-- Wrapper -->
+<body>
 <div id="wrapper">
-
     <!-- Header -->
     <header id="header">
         <div class="inner">
@@ -86,82 +86,49 @@
             </c:if>
         </ul>
     </nav>
-
-    <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <table>
-                <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày</th>
-                    <th>Thành tiền</th>
-                    <th></th>
-                </tr>
-                <c:forEach var="order" items="${orders}">
-                    <tr>
-                        <td>${order.id}</td>
-                        <td>${order.orderDate}</td>
-                        <td>${order.totalAmount}</td>
-                        <td>
-                            <a href="/unconfirmed-orders?action=delete&id=${order.id}" class="btn btn-danger">Hủy</a>
-<%--                            <form action="/unconfirmed-orders" method="get" id="delete${order.id}" style="display: inline">--%>
-<%--                                <input type="hidden" name="action" value="delete">--%>
-<%--                                <input type="hidden" name="id" value="${order.id}">--%>
-<%--                                <a class="btn btn-danger" onclick="acceptDelete(${order.id})"--%>
-<%--                                   style="color: white">Xoá</a>--%>
-<%--                            </form>--%>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
+    <div class="container">
+        <div class="row justify-content-around">
+            <form method="post" class="col-md-6 bg-light p-3 my-3" id="view${users.id}">
+                <h1 class="text-center text-uppercase h3">Thông tin tài khoản</h1>
+                <input type="hidden" name="action" value="view">
+                <input type="hidden" name="id">
+                <div class="form-group">
+                    <label for="username">Tên tài khoản</label>
+                    <span name="username" id="username" class="form-control">${users.username}</span>
+                </div>
+                <div class="form-group">
+                    <label for="password" >Mật khẩu</label>
+                    <input type="text" name="password" id="password" class="form-control" value="${users.password}">
+                </div>
+                <div class="form-group">
+                    <label for="name">Tên hiển thị</label>
+                    <input type="text" name="name" id="name" class="form-control" value="${users.name}">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" name="phone" id="phone" class="form-control" value="${users.phone}" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" title="Nhập không đúng định dạng">
+                </div>
+                <input type="hidden" name="roleId" value="${users.roleId}">
+                <input type="hidden" name="status" value="true">
+                <input type="submit" value="Sửa" class="btn-primary btn-block btn" href="/">
+            </form>
         </div>
-        <br>
-        <br>
     </div>
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="inner">
-            <section>
-                <ul class="icons">
-                    <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-                </ul>
-
-                &nbsp;
-            </section>
-
-            <ul class="copyright">
-                <li>Copyright © 2020 Company Name</li>
-                <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
-            </ul>
-        </div>
-    </footer>
-
-</div>
-
+</div></form>
+</body>
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
-<%--<body>--%>
-<%--<c:forEach var="i" begin="0" end="${tempOrder.size() - 1}">--%>
-<%--    <h3>${tempOrder.get(i).book.name}, ${tempOrder.get(i).book.price}, ${tempOrder.get(i).quantity}, ${intoMoney.get(i)}, <a href="/carts?action=delete&id=${tempOrder.get(i).id}">xóa</a></h3>--%>
-<%--</c:forEach>--%>
-<%--<h3>${totalAmount}</h3>--%>
-<%--<a href="/carts?action=confirm">Đặt hàng</a>--%>
-<%--</body>--%>
-<%--<c:forEach var="order" items="${orders}">--%>
-<%--<h3>${order.id}, ${order.orderDate}, ${order.totalAmount}</h3>--%>
-<%--<a href="/unconfirmed-orders?action=delete&id=${order.id}">Hủy</a>--%>
-<%--</c:forEach>--%>
 <script>
-    function acceptDelete(id) {
-        if (confirm("Bạn có xác nhận xoá không ")) {
-            alert("Xoá thành công");
-            document.getElementById("delete" + id).submit();
-        } else alert("Xoá thất bại")
-    }
+    // function acceptEdit(id) {
+    //     if (confirm("Bạn có xác nhận sửa hay không")){
+    //         alert("Sửa thành công");
+    //         document.getElementById("edit" +id).submit();
+    //     }
+    //     else alert("Sửa thất bại")
+    // }
 </script>
 </html>
