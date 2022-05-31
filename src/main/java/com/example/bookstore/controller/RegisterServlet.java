@@ -57,14 +57,16 @@ public class RegisterServlet extends HttpServlet {
     private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-//        String repassword = request.getParameter("repassword");
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
-//        if (password.equals(repassword)) {
-        userService.add(new User(username, password, name, phone, roleId, status));
-        response.sendRedirect("/registers");
-//        }
+        if (userService.findByUserName(username) == null) {
+            userService.add(new User(username, password, name, phone, roleId, status));
+            response.sendRedirect("/logins");
+        } else {
+            response.sendRedirect("/registers");
+        }
+
     }
 }

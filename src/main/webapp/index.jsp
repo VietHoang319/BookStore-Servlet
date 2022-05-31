@@ -75,7 +75,7 @@
             <c:if test="${name != null}">
                 <li><a href="/logins?action=logout">Đăng xuất</a></li>
             </c:if>
-            <li><a href="contact.html">Liên hệ</a></li>
+            <li><a href="#footer">Liên hệ</a></li>
         </ul>
     </nav>
 
