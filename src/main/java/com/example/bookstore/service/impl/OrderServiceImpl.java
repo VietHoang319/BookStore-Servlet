@@ -142,4 +142,29 @@ public class OrderServiceImpl implements OrderService {
         }
         return order;
     }
+
+    @Override
+    public List<Order> findUnconfirm() {
+        List<Order> orders = new ArrayList<>();
+        String query = "select o.id, o.customerId, u.name, orderDate, totalAmount\n" +
+                "from orderr o\n" +
+                "join user u on o.customerId = u.id\n" +
+                "where o.status = 1;";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                int customerId = resultSet.getInt("customerId");
+                String name = resultSet.getString("name");
+                LocalDate localDate = LocalDate.parse(resultSet.getString("orderDate"));
+                int totalAmount = resultSet.getInt("totalAmount");
+                User user = new User(customerId, name);
+                Order order = new Order(id, user, localDate, totalAmount);
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orders;
+    }
 }
