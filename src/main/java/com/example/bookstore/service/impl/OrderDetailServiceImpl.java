@@ -66,7 +66,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public List<OrderDetail> findByOrderId(String id) {
         List<OrderDetail> orderDetails = new ArrayList<>();
-        String query = "select od.bookId, b.name, numberOfOrder, intoMoney\n" +
+        String query = "select od.bookId, b.name, numberOfBook, numberOfOrder, intoMoney\n" +
                 "from orderdetail od\n" +
                 "join book b on b.id = od.bookId where od.orderId = ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -77,7 +77,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
                 String name = resultSet.getString("name");
                 int numberOfOrder = resultSet.getInt("numberOfOrder");
                 int intoMoney = resultSet.getInt("intoMoney");
-                Book book = new Book(bookId, name);
+                int number = resultSet.getInt("numberOfBook");
+                Book book = new Book(bookId, name, number);
                 orderDetails.add(new OrderDetail(book, numberOfOrder, intoMoney));
             }
         } catch (SQLException e) {
