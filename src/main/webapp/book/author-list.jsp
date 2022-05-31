@@ -47,7 +47,7 @@
         <h2>Menu</h2>
         <ul>
             <c:if test="${name == null}">
-                <li><a href="logins">Đăng nhập</a></li>
+                <li><a href="logins">Login</a></li>
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name!= null}">

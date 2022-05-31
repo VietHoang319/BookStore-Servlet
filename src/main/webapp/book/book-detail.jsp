@@ -44,11 +44,13 @@
     <nav id="menu">
         <h2>Menu</h2>
         <ul>
+            <c:if test="${name == null}">
+                <li><a href="logins">Login</a></li>
+            </c:if>
+            <li><a href="/" class="active">Trang chủ</a></li>
             <c:if test="${name != null}">
                 <li><a href="contact.html">${name}</a></li>
             </c:if>
-            <li><a href="" class="active">Trang chủ</a></li>
-
             <li><a href="/books">Sách</a></li>
             <c:if test="${name != null && (roleId==1 ||roleId==2)}">
                 <li>
@@ -81,8 +83,8 @@
                     </div>
 
                     <div class="col-md-7">
-                        <p><strong>Tác giả: </strong><a href="#">${book.author.name}</a></p>
-                        <p><strong>Thể loại: </strong><a href="#">${book.category.name}</a></p>
+                        <p><strong>Tác giả: </strong><a href="book-details?action=searchAuthor&id=${book.author.id}">${book.author.name}</a></p>
+                        <p><strong>Thể loại: </strong><a href="book-details?action=searchCategory&id=${book.category.id}">${book.category.name}</a></p>
                         <p><strong>Số lượng sách còn trong kho: </strong>${book.numberOfBook} quyển</p>
 
                         <div class="row">

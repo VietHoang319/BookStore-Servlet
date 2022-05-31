@@ -13,6 +13,7 @@ public class BookServiceImpl implements BookService {
     private String jdbcURL = "jdbc:mysql://localhost:3306/bookstore?useSSL=false";
     private String jdbcUsername = "root";
     private String jdbcPassword = "123456";
+    CategoryServiceImpl categoryService = new CategoryServiceImpl();
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -30,7 +31,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void add(Book book) throws SQLException {
         String insertBook = "insert into book(name, authorId, categoryId, image, price, numberOfBook, status) values (?,?,?,?,?,?,true);";
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(insertBook)){
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(insertBook)) {
             preparedStatement.setString(1, book.getName());
             preparedStatement.setString(2, String.valueOf(book.getAuthor().getId()));
             preparedStatement.setString(3, String.valueOf(book.getCategory().getId()));
@@ -73,6 +74,65 @@ public class BookServiceImpl implements BookService {
         return book;
     }
 
+    public List<Book> findByCategoryId(int categoryId) {
+        List<Book> book = new ArrayList<>();
+        String query = "select book.id as id, book.name as bookName, authorId, author.name as authorName, categoryId, category.name as categoryName, image, price, numberOfBook\n" +
+                "from book\n" +
+                "join author on author.id = book.authorId\n" +
+                "join category on category.id = book.categoryId where book.categoryID = ? and book.status = true;";
+        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, categoryId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idFind = rs.getInt("id");
+                String name = rs.getString("bookName");
+                int authorId = rs.getInt("authorId");
+                String authorName = rs.getString("authorName");
+                int categoryIdFind = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                String image = rs.getString("image");
+                int price = rs.getInt("price");
+                int numberOfBook = rs.getInt("numberOfBook");
+                Author author = new Author(authorId, authorName);
+                Category category = new Category(categoryIdFind, categoryName);
+                book.add(new Book(idFind, name, author, category, image, price, numberOfBook));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return book;
+    }
+
+    @Override
+    public List<Book> findByAuthorId(int authorId) {
+        List<Book> book = new ArrayList<>();
+        String query = "select book.id as id, book.name as bookName, authorId, author.name as authorName, categoryId, category.name as categoryName, image, price, numberOfBook\n" +
+                "from book\n" +
+                "join author on author.id = book.authorId\n" +
+                "join category on category.id = book.categoryId where book.authorId = ? and book.status = true;";
+        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, authorId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idFind = rs.getInt("id");
+                String name = rs.getString("bookName");
+                int authorIdFind = rs.getInt("authorId");
+                String authorName = rs.getString("authorName");
+                int categoryIdFind = rs.getInt("categoryId");
+                String categoryName = rs.getString("categoryName");
+                String image = rs.getString("image");
+                int price = rs.getInt("price");
+                int numberOfBook = rs.getInt("numberOfBook");
+                Author author = new Author(authorIdFind, authorName);
+                Category category = new Category(categoryIdFind, categoryName);
+                book.add(new Book(idFind, name, author, category, image, price, numberOfBook));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return book;
+    }
+
     @Override
     public List<Book> findAll() {
         List<Book> books = new ArrayList<>();
@@ -96,7 +156,7 @@ public class BookServiceImpl implements BookService {
     public List<Book> findByName(String name) {
         List<Book> books = new ArrayList<>();
         String query = "select id, name, image, price from book where name like ? and status = true;";
-        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)){
+        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + name + "%");
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -139,4 +199,5 @@ public class BookServiceImpl implements BookService {
         }
         return rowEdit;
     }
+
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 @WebServlet(name = "LoginServlet", urlPatterns = "/logins")
 public class LoginServlet extends HttpServlet {
     CustomerServiceImpl customerService = new CustomerServiceImpl();
-
+    static int currentId =0;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -75,6 +75,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("phone",user.getPhone());
             session.setAttribute("name" , user.getName());
             session.setAttribute("roleId",user.getRoleId());
+            currentId = user.getId();
             response.sendRedirect("/");
         }
     }
