@@ -59,6 +59,16 @@ public class OrderServiceImpl implements OrderService {
         return false;
     }
 
+    public boolean delete(String id) throws SQLException {
+        boolean rowDelete;
+        String deleteOrder = "UPDATE orderr set status = 0 where id = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(deleteOrder)) {
+            preparedStatement.setString(1, id);
+            rowDelete = preparedStatement.executeUpdate() > 0;
+        }
+        return false;
+    }
+
     @Override
     public boolean update(Order order) throws SQLException {
         return false;

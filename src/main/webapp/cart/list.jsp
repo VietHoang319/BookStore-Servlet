@@ -22,7 +22,6 @@
 <body class="is-preload">
 <!-- Wrapper -->
 <div id="wrapper">
-
     <!-- Header -->
     <header id="header">
         <div class="inner">

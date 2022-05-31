@@ -8,11 +8,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "UnconfirmedServlet", value = "/unconfirmed-orders")
 public class UnconfirmedServlet extends HttpServlet {
-    OrderService orderService = new OrderServiceImpl();
+    OrderServiceImpl orderService = new OrderServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -23,9 +24,22 @@ public class UnconfirmedServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "delete":
+                try {
+                    deleteOrder(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             default:
                 showUnconfirmedOrder(request,response,httpSession);
         }
+    }
+
+    private void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String id = request.getParameter("id");
+        orderService.delete(id);
+        response.sendRedirect("/unconfirmed-orders");
     }
 
     private void showUnconfirmedOrder(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws ServletException, IOException {

@@ -83,7 +83,12 @@ public class TempOrderServlet extends HttpServlet {
                 tempOrder.remove(tempOrder.get(i));
             }
         }
-        response.sendRedirect("/carts");
+        if (tempOrder.size() != 0) {
+            response.sendRedirect("/carts");
+        }
+        else {
+            response.sendRedirect("/");
+        }
     }
 
     private void showTempOrder(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws ServletException, IOException {
@@ -93,16 +98,20 @@ public class TempOrderServlet extends HttpServlet {
             tempOrder = new ArrayList<>();
             httpSession.setAttribute("tempOrder", tempOrder);
         }
-        List<Integer> intoMoneyList = new ArrayList<>();
-        int totalAmount = 0;
-        for (TempItem item : tempOrder) {
-            int intoMoney = item.getBook().getPrice() * item.getQuantity();
-            intoMoneyList.add(intoMoney);
-            totalAmount += intoMoney;
+        if (tempOrder.size() != 0) {
+            List<Integer> intoMoneyList = new ArrayList<>();
+            int totalAmount = 0;
+            for (TempItem item : tempOrder) {
+                int intoMoney = item.getBook().getPrice() * item.getQuantity();
+                intoMoneyList.add(intoMoney);
+                totalAmount += intoMoney;
+            }
+            request.setAttribute("intoMoney", intoMoneyList);
+            request.setAttribute("totalAmount", totalAmount);
+            requestDispatcher.forward(request, response);
+        } else {
+            response.sendRedirect("/");
         }
-        request.setAttribute("intoMoney", intoMoneyList);
-        request.setAttribute("totalAmount", totalAmount);
-        requestDispatcher.forward(request, response);
     }
 
     @Override
