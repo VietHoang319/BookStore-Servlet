@@ -60,7 +60,7 @@
                 </li>
             </c:if>
             <li><a href="/books">Sách</a></li>
-            <c:if test="${name != null && (roleId==1 ||roleId==2)}">
+            <c:if test="${name != null && (roleId==1 ||roleId==2 || roleId==4)}">
                 <li>
                     <span class="dropdown-toggle">Quản lý</span>
 
@@ -68,7 +68,9 @@
                         <li><a href="/book-management">Quản lý sách</a></li>
                         <li><a href="/authors">Quản lý tác giả</a></li>
                         <li><a href="/customers">Quản lý khách hàng</a></li>
-                        <li><a href="/users">Quản lý nhân viên</a></li>
+                        <c:if test="${roleId ==4}">
+                            <li><a href="/users">Quản lý nhân viên</a></li>
+                        </c:if>
                         <li>
                             <span class="dropdown-toggle">Quản lý đơn hàng</span>
                             <ul>

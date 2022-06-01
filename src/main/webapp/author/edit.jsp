@@ -65,7 +65,9 @@
                         <li><a href="/book-management">Quản lý sách</a></li>
                         <li><a href="/authors">Quản lý tác giả</a></li>
                         <li><a href="/customers">Quản lý khách hàng</a></li>
-                        <li><a href="/users">Quản lý nhân viên</a></li>
+                        <c:if test="${roleId ==4}">
+                            <li><a href="/users">Quản lý nhân viên</a></li>
+                        </c:if>
                         <li>
                             <span class="dropdown-toggle">Quản lý đơn hàng</span>
                             <ul>
