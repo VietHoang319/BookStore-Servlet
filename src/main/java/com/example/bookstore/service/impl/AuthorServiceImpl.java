@@ -66,7 +66,7 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> findAll() {
         List<Author> authors = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from author");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from author where status = true");) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
