@@ -214,4 +214,29 @@ public class BookServiceImpl implements BookService {
             }
         }
     }
+
+    @Override
+    public List<Book> findTop6BookOfOrder() {
+        List<Book> books = new ArrayList<>();
+        String query = "select id, sum(numberOfOrder) as totalBook, name, price, image\n" +
+                "from orderdetail od\n" +
+                "join book b on b.id = od.bookId\n" +
+                "where b.status = true\n" +
+                "group by b.id\n" +
+                "order by  totalBook desc\n" +
+                "limit 6";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                int price = resultSet.getInt("price");
+                String image = resultSet.getString("image");
+                books.add(new Book(id, name, image, price));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return books;
+    }
 }

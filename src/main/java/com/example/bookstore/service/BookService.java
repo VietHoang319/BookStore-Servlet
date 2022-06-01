@@ -9,4 +9,5 @@ public interface BookService extends GeneralService<Book> {
     List<Book> findByCategoryId(int categoryId);
     List<Book> findByAuthorId(int authorId);
     void editQuantity(List<OrderDetail> orderDetails);
+    List<Book> findTop6BookOfOrder();
 }

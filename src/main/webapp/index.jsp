@@ -123,97 +123,24 @@
 
             <br>
 
-            <h2 class="h2">Featured Products</h2>
+            <h2 class="h2">Các sản phẩm bán chạy</h2>
 
             <!-- Products -->
             <section class="tiles">
-                <article class="style1">
+                <c:forEach var="book" items="${books}">
+                    <article class="style1">
 									<span class="image">
-										<img src="images/product-1-720x480.jpg" alt=""/>
+										<img src="${book.image}" alt="" height="425px"/>
 									</span>
-                    <a href="product-details.html">
-                        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+                        <a href="/book-details?id=${book.id}">
+                            <h2>${book.name}</h2>
 
-                        <p>
-                            <del>$19.00</del>
-                            <strong>$19.00</strong></p>
-
-                        <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                    </a>
-                </article>
-                <article class="style2">
-									<span class="image">
-										<img src="images/product-2-720x480.jpg" alt=""/>
-									</span>
-                    <a href="product-details.html">
-                        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
-
-                        <p>
-                            <del>$19.00</del>
-                            <strong>$19.00</strong></p>
-
-                        <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                    </a>
-                </article>
-                <article class="style3">
-									<span class="image">
-										<img src="images/product-3-720x480.jpg" alt=""/>
-									</span>
-                    <a href="product-details.html">
-                        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
-
-                        <p>
-                            <del>$19.00</del>
-                            <strong>$19.00</strong></p>
-
-                        <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                    </a>
-                </article>
-
-                <article class="style4">
-									<span class="image">
-										<img src="images/product-4-720x480.jpg" alt=""/>
-									</span>
-                    <a href="product-details.html">
-                        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
-
-                        <p>
-                            <del>$19.00</del>
-                            <strong>$19.00</strong></p>
-
-                        <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                    </a>
-                </article>
-
-                <article class="style5">
-									<span class="image">
-										<img src="images/product-5-720x480.jpg" alt=""/>
-									</span>
-                    <a href="product-details.html">
-                        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
-
-                        <p>
-                            <del>$19.00</del>
-                            <strong>$19.00</strong></p>
-
-                        <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                    </a>
-                </article>
-
-                <article class="style6">
-									<span class="image">
-										<img src="images/product-6-720x480.jpg" alt=""/>
-									</span>
-                    <a href="product-details.html">
-                        <h2>Lorem ipsum dolor sit amet, consectetur</h2>
-
-                        <p>
-                            <del>$19.00</del>
-                            <strong>$19.00</strong></p>
-
-                        <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                    </a>
-                </article>
+                            <p>
+                                <strong>${book.price} đồng</strong>
+                            </p>
+                        </a>
+                    </article>
+                </c:forEach>
             </section>
 
             <p class="text-center"><a href="/books">More Books &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>

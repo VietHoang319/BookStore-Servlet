@@ -22,6 +22,7 @@ public class BookIDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
+        HttpSession httpSession = request.getSession();
         String action = request.getParameter("action");
         if(action == null) {
             action = "";
@@ -35,7 +36,7 @@ public class BookIDetailServlet extends HttpServlet {
                 break;
             default:
                 try {
-                    showBookDetail(request, response);
+                    showBookDetail(request, response, httpSession);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -59,10 +60,12 @@ public class BookIDetailServlet extends HttpServlet {
 
     }
 
-    private void showBookDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    private void showBookDetail(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         Book book = bookService.findById(id);
         request.setAttribute("book", book);
+        List<Book> books = bookService.findTop6BookOfOrder();
+        request.setAttribute("books", books);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("book/book-detail.jsp");
         requestDispatcher.forward(request, response);
     }

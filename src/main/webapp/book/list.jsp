@@ -102,7 +102,7 @@
             <!-- Products -->
             <section class="tiles">
                 <c:forEach var="book" items="${books}">
-                    <article class="style2">
+                    <article class="style1">
 									<span class="image">
 										<img src="${book.image}" alt="" height="425px"/>
 									</span>

@@ -11,11 +11,13 @@
 <html>
 <head>
     <title>PHPJabbers.com | Free Book Online Store Website Template</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css"/>
+    </noscript>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -97,28 +99,33 @@
                     </div>
 
                     <div class="col-md-7">
-                        <p><strong>Tác giả: </strong><a href="book-details?action=searchAuthor&id=${book.author.id}">${book.author.name}</a></p>
-                        <p><strong>Thể loại: </strong><a href="book-details?action=searchCategory&id=${book.category.id}">${book.category.name}</a></p>
+                        <p><strong>Tác giả: </strong><a
+                                href="book-details?action=searchAuthor&id=${book.author.id}">${book.author.name}</a></p>
+                        <p><strong>Thể loại: </strong><a
+                                href="book-details?action=searchCategory&id=${book.category.id}">${book.category.name}</a>
+                        </p>
                         <p><strong>Số lượng sách còn trong kho: </strong>${book.numberOfBook} quyển</p>
 
                         <div class="row">
                             <div class="col-sm-11">
-                                <form method="post" action="/carts">
-                                    <input type="hidden" name="id" value="${book.id}">
-                                    <label class="control-label">Số lượng đặt hàng</label>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input type="number" value="1" name="numberOfOrder" id="name">
+                                <c:if test="${name!= null}">
+                                    <form method="post" action="/carts">
+                                        <input type="hidden" name="id" value="${book.id}">
+                                        <label class="control-label">Số lượng đặt hàng</label>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <input type="number" value="1" name="numberOfOrder" id="name"
+                                                           max="${book.numberOfBook}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="hidden" name="action" value="add">
+                                                <input type="submit" class="primary" value="Thêm vào giỏ hàng">
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-6">
-                                            <input type="hidden" name="action" value="add">
-                                            <input type="submit" class="primary" value="Thêm vào giỏ hàng">
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -133,45 +140,23 @@
 
                 <!-- Products -->
                 <section class="tiles">
-                    <article class="style1">
-										<span class="image">
-											<img src="images/product-1-720x480.jpg" alt="" />
-										</span>
-                        <a href="product-details.html">
-                            <h2>Lorem ipsum dolor sit amet, consectetur</h2>
+                    <c:forEach var="book" items="${books}">
+                        <article class="style1">
+									<span class="image">
+										<img src="${book.image}" alt="" height="425px"/>
+									</span>
+                            <a href="/book-details?id=${book.id}">
+                                <h2>${book.name}</h2>
 
-                            <p><del>$19.00</del> <strong>$19.00</strong></p>
-
-                            <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                        </a>
-                    </article>
-
-                    <article class="style2">
-										<span class="image">
-											<img src="images/product-2-720x480.jpg" alt="" />
-										</span>
-                        <a href="product-details.html">
-                            <h2>Lorem ipsum dolor sit amet, consectetur</h2>
-
-                            <p><del>$19.00</del> <strong>$19.00</strong></p>
-
-                            <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                        </a>
-                    </article>
-
-                    <article class="style3">
-										<span class="image">
-											<img src="images/product-6-720x480.jpg" alt="" />
-										</span>
-                        <a href="product-details.html">
-                            <h2>Lorem ipsum dolor sit amet, consectetur</h2>
-
-                            <p><del>$19.00</del> <strong>$19.00</strong></p>
-
-                            <p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-                        </a>
-                    </article>
+                                <p>
+                                    <strong>${book.price} đồng</strong>
+                                </p>
+                            </a>
+                        </article>
+                    </c:forEach>
                 </section>
+
+                <p class="text-center"><a href="/books">More Books &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
             </div>
         </div>
     </div>
@@ -189,7 +174,7 @@
             </section>
 
             <ul class="copyright">
-                <li>Copyright © 2020 Company Name </li>
+                <li>Copyright © 2020 Company Name</li>
                 <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
             </ul>
         </div>
