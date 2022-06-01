@@ -116,9 +116,7 @@
             <!-- About Us -->
             <header id="inner">
                 <h1>Thư gửi đến bạn đọc</h1>
-                <p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus
-                    arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros aliquam.
-                    Lorem ipsum dolor sit amet nullam dolore.</p>
+                <p>Một cuốn sách thực sự hay nên đọc trong tuổi trẻ, rồi đọc lại khi đã trưởng thành, và một nửa lúc tuổi già, giống như một tòa nhà đẹp nên được chiêm ngưỡng trong ánh bình minh, nắng trưa và ánh trăng</p>
             </header>
 
             <br>
