@@ -107,7 +107,7 @@
                         <p><strong>Số lượng sách còn trong kho: </strong>${book.numberOfBook} quyển</p>
 
                         <div class="row">
-                            <div class="col-sm-11">
+                            <div class="col-sm-12">
                                 <c:if test="${name!= null}">
                                     <form method="post" action="/carts">
                                         <input type="hidden" name="id" value="${book.id}">
@@ -119,7 +119,7 @@
                                                            max="${book.numberOfBook}">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-7">
                                                 <input type="hidden" name="action" value="add">
                                                 <input type="submit" class="primary" value="Thêm vào giỏ hàng">
                                             </div>
