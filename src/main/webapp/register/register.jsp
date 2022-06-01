@@ -20,11 +20,11 @@
                 <input type="hidden" name="id">
                 <div class="form-group">
                     <label for="username">Tên tài khoản</label>
-                    <input type="text" name="username" id="username" class="form-control">
+                    <input type="text" name="username" id="username" class="form-control" required pattern="^\w+$">
                 </div>
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" name="password" id="password" class="form-control">
+                    <input type="password" name="password" id="password" class="form-control" required pattern="^\w+$">
                 </div>
 <%--                <div class="form-group">--%>
 <%--                    <label for="repassword">Nhập lại mật khẩu</label>--%>
