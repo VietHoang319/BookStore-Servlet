@@ -107,11 +107,19 @@
                             <div class="col-sm-11">
                                 <div class="row">
                                     <div>
-                                        <button class="primary" data-toggle="modal" data-target="#staticBackdrop">Sửa sách</button>
-<%--                                        <input type="button" class="primary" value="Sửa sách">--%>
+                                        <button class="primary" data-toggle="modal" data-target="#staticBackdrop">Sửa
+                                            sách
+                                        </button>
+                                        <%--                                        <input type="button" class="primary" value="Sửa sách">--%>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <a href="/book-infors?action=delete&id=${book.id}"><input type="button" class="primary" value="Xóa sách"></a>
+                                    <div class="col-sm-7">
+                                        <%--                                        <a href="/book-infors?action=delete&id=${book.id}"><input type="button" class="primary" value="Xóa sách"></a>--%>
+                                        <form action="/book-infors" id="delete${book.id}" style="display: inline">
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="id" value="${book.id}">
+                                            <input type="button" class="primary" onclick="acceptDelete(${book.id})"
+                                                value="Xoá Sách">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +174,9 @@
                 </form>
                 <div>
                     <input type="file" name="file" id="upload" onchange="upload()"></div>
-                <div style="color: white">error404error404error404error404error404error404error404error404error404error404error404error404error404error404error404</div>
+                <div style="color: white">
+                    error404error404error404error404error404error404error404error404error404error404error404error404error404error404error404
+                </div>
             </div>
         </div>
     </div>
@@ -199,5 +209,13 @@
 <script src="assets/js/jquery.scrollex.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/upload.js"></script>
+<script>
+    function acceptDelete(id) {
+        if (confirm("Bạn có xác nhận xoá không ")) {
+            alert("Xoá thành công");
+            document.getElementById("delete" + id).submit();
+        } else alert("Xoá thất bại")
+    }
+</script>
 </body>
 </html>

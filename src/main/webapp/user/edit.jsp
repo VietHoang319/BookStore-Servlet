@@ -10,11 +10,6 @@
 <html>
 <head>
     <title>Title</title>
-<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">--%>
-<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--%>
-<%--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--%>
-    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/main.css"/>
@@ -94,11 +89,11 @@
                 <input type="hidden" name="id">
                 <div class="form-group">
                     <label for="username">Tên tài khoản</label>
-                    <span name="username" id="username" class="form-control" pattern="^\w{1,10}$" title="Nhập không đúng định dạng">${users.username}</span>
+                    <span name="username" id="username" class="form-control" >${users.username}</span>
                 </div>
                 <div class="form-group">
                     <label for="password" >Mật khẩu</label>
-                    <input type="text" name="password" id="password" class="form-control" value="${users.password}" pattern="^\w{1,10}$" title="Nhập không đúng định dạng">
+                    <input type="text" name="password" id="password" class="form-control" value="${users.password}" required pattern="^\w+$">
                 </div>
                 <div class="form-group">
                     <label for="name">Tên hiển thị</label>
