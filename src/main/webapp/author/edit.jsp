@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
 </head>
-<body class="is-preload">
+<body>
 <div id="wrapper">
     <!-- Header -->
     <header id="header">
@@ -39,7 +39,6 @@
 
         </div>
     </header>
-
     <!-- Menu -->
     <nav id="menu">
         <h2>Menu</h2>
@@ -83,7 +82,7 @@
             </c:if>
         </ul>
     </nav>
-    </header>
+
     <div id="main">
         <div class="container">
             <div class="row justify-content-around">
@@ -93,7 +92,7 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">Tên Tác Giả</label>
-                        <input type="text" name="name" id="name" class="form-control" value="${authorEdit.name}" required pattern="^\w+$">
+                        <input type="text" name="name" id="name" class="form-control" value="${authorEdit.name}">
                     </div>
                     <input type="hidden" name="status" value="true">
                     <input type="submit" value="Sửa" class="btn-primary btn-block btn">
@@ -120,7 +119,6 @@
         </div>
     </footer>
 </div>
-
 </body>
 <script>
 </script>

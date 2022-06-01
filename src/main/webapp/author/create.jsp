@@ -21,7 +21,7 @@
     </noscript>
 
 </head>
-<body class="is-preload">
+<body>
 <div id="wrapper">
 
     <!-- Header -->
@@ -48,10 +48,10 @@
         <h2>Menu</h2>
         <ul>
             <c:if test="${name == null}">
-                <li><a href="logins">Đăng nhập</a></li>
+                <a href="logins">Đăng nhập</a>
             </c:if>
             <li><a href="/" class="active">Trang chủ</a></li>
-            <c:if test="${name != null}">
+            <c:if test="${name!= null}">
                 <li><a href="/logins?action=view">${name}</a></li>
                 <li>
                     <span class="dropdown-toggle">Đơn hàng</span>
@@ -84,9 +84,9 @@
             <c:if test="${name != null}">
                 <li><a href="/logins?action=logout">Đăng xuất</a></li>
             </c:if>
+
         </ul>
     </nav>
-
 
 
     <div id="main">
@@ -97,7 +97,7 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">Tên Tác Giả</label>
-                        <input type="text" name="name" id="name" class="form-control" required pattern="^\w+$">
+                        <input type="text" name="name" id="name" class="form-control">
                     </div>
                     <input type="hidden" name="status" value="true">
                     <input type="submit" value="Tạo" class="btn-primary btn-block btn">
@@ -112,10 +112,7 @@
                     <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
                     <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
                 </ul>
-
-                &nbsp;
             </section>
-
             <ul class="copyright">
                 <li>Copyright © 2020 Company Name</li>
                 <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
