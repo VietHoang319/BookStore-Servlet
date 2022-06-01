@@ -96,12 +96,13 @@ public class LoginServlet extends HttpServlet {
         response.sendRedirect("/");
     }
 
-    private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+    private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = customerService.findByUserNamePassword(username , password);
         if(user == null){
-            response.sendRedirect("logins");
+            request.setAttribute("mess", "Nhập sai tài khoản hoặc mật khẩu");
+            request.getRequestDispatcher("login/login.jsp").forward(request,response);
         } else {
             session.setAttribute("phone",user.getPhone());
             session.setAttribute("name" , user.getName());

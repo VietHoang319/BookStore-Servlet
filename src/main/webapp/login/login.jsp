@@ -31,6 +31,7 @@
                     <label for="password">Mật khẩu</label>
                     <input type="password" name="password" id="password" class="form-control">
                 </div>
+                <span style="color: red" class="text-center" >${mess}</span>
                 <input type="submit" value="Đăng nhập" class="btn-primary btn-block btn">
                 <a class="btn-primary btn-block btn" href="registers">Đăng ký</a>
             </form>
