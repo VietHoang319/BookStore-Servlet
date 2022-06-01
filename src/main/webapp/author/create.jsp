@@ -11,7 +11,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PHPJabbers.com | Free Book Online Store Website Template</title>
+    <title>Book Online Store Website</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
@@ -104,6 +104,24 @@
                 </form>
             </div>
     </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <section>
+                <ul class="icons">
+                    <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                </ul>
+
+                &nbsp;
+            </section>
+
+            <ul class="copyright">
+                <li>Copyright © 2020 Company Name</li>
+                <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+            </ul>
+        </div>
+    </footer>
 </div>
 </body>
 </html>
