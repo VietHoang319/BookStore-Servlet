@@ -26,10 +26,6 @@
                     <label for="password">Mật khẩu</label>
                     <input type="password" name="password" id="password" class="form-control" required pattern="^\w+$">
                 </div>
-<%--                <div class="form-group">--%>
-<%--                    <label for="repassword">Nhập lại mật khẩu</label>--%>
-<%--                    <input type="text" name="username" id="repassword" class="form-control">--%>
-<%--                </div>--%>
                 <div class="form-group">
                     <label for="name">Tên hiển thị</label>
                     <input type="text" name="name" id="name" class="form-control">
